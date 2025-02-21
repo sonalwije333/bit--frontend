@@ -1,24 +1,35 @@
-<p>form-demo works!</p>
+<div class="container">
+   <div class="form-section">
 
 <form class="example-form" [formGroup]="demoForm" (ngSubmit)="onSubmit()" >
 
-  <mat-form-field class="example-full-width">
+  <mat-form-field class="full-width">
     <mat-label>First Name</mat-label>
     <input matInput placeholder="firstName" formControlName="firstName" >
   </mat-form-field>
-  <mat-form-field class="example-full-width" >
+  <mat-form-field class="full-width" >
     <mat-label>Last Name</mat-label>
     <input matInput placeholder="lastName" formControlName="lastName" >
   </mat-form-field>
-  <mat-form-field class="example-full-width" >
+  <mat-form-field class="full-width" >
     <mat-label>Age </mat-label>
     <input matInput placeholder="age"   formControlName="age">
   </mat-form-field>
-  <mat-form-field class="example-full-width">
+  <mat-form-field class="full-width">
     <mat-label>Email</mat-label>
     <input matInput placeholder="email" formControlName="email">
   </mat-form-field>
 
 
-<button type="submit" mat-raised-button>submit</button>
+<button type="submit" mat-raised-button color="primary" class="form-button">Save</button>
+<button type="submit" mat-raised-button color="secondary" class="form-button">Reset</button>
 </form>
+
+   </div>
+   <div class="table-section">table here</div>
+</div>
+
+
+
+
+
