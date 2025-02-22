@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { request } from 'http';
+import { log } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -30,4 +31,21 @@ export class FormDemoServiceService {
 }
 
 
+
+//getData
+
+getData()
+{
+console.log("get data");
+
+  const requestUrl = environment.baseUrl + '/form-demo';   //http://localhost:8080/form-demo
+  let headers = {};
+  if (this.httpService.getAuthToken() !== null) {
+    headers = {
+      Authorization: 'Bearer ' + this.httpService.getAuthToken(),
+    };
+  }
+
+  return this.http.get(requestUrl, { headers: headers });
+}
 }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,FormControl } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { FormDemoServiceService } from 'src/app/services/form-demo/form-demo-service.service';
 
 
@@ -10,10 +11,10 @@ export interface PeriodicElement {
   symbol: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+// const ELEMENT_DATA: any[] = [
+//   { firstName: 1, lastName: 'Hydrogen', age: 1.0079, email: 'H'},
 
-];
+// ];
 
 
 @Component({
@@ -22,12 +23,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './form-demo.component.html',
   styleUrl: './form-demo.component.scss'
 })
-export class FormDemoComponent {
-             /* import form group ,form builder, form control */
-      /* first_name, last_name age , email */
+export class FormDemoComponent implements OnInit {
       demoForm: FormGroup;
-      displayedColumns: string[] = ['demo-position', 'demo-name', 'demo-weight', 'demo-symbol'];
-      dataSource = ELEMENT_DATA;
+      displayedColumns: string[] = ['firstName', 'lastName', 'age', 'email', 'actions'];
+      dataSource = new MatTableDataSource<any>;
+      saveButtonLabel = 'Save';
 
  constructor(private fb: FormBuilder,private demoService : FormDemoServiceService){
     this.demoForm = this.fb.group({
@@ -37,6 +37,22 @@ export class FormDemoComponent {
           email: new FormControl('')
     });
  }
+  ngOnInit(): void {
+//get data requets
+    this.populateData();
+  }
+
+
+public populateData(): void{
+    //implemet get data code
+    //ts -> service file function
+    // service -> backend call
+    this.demoService.getData().subscribe((response: any[]) => {
+       console.log('get data response' , response);
+
+       this.dataSource = new MatTableDataSource(response);
+    });
+}
 
 
 onSubmit(){
@@ -49,4 +65,15 @@ onSubmit(){
     });
 }
 
+
+public resetData(): void {
+  this.demoForm.reset();
+  this.saveButtonLabel = "Save";
+}
+
+public editData(data:any): void {
+  this.demoForm.patchValue(data);
+  this.saveButtonLabel = "Edit";
+}
+public deleteData(): void {}
 }
