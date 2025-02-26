@@ -28,6 +28,7 @@ export class FormDemoComponent implements OnInit {
       displayedColumns: string[] = ['firstName', 'lastName', 'age', 'email', 'actions'];
       dataSource = new MatTableDataSource<any>;
       saveButtonLabel = 'Save';
+input: any;
 
  constructor(private fb: FormBuilder,private demoService : FormDemoServiceService){
     this.demoForm = this.fb.group({
@@ -75,5 +76,12 @@ public editData(data:any): void {
   this.demoForm.patchValue(data);
   this.saveButtonLabel = "Edit";
 }
-public deleteData(): void {}
+public deleteData(data:any): void {
+
+}
+
+applyFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filterValue.trim().toLowerCase();
+}
 }

@@ -22,11 +22,15 @@
 
 
 <button type="submit" mat-raised-button color="primary" class="form-button">{{saveButtonLabel}}</button>
-<button type="submit" mat-raised-button color="secondary" class="form-button">Reset</button>
+<button type="submit" mat-raised-button color="secondary" class="form-button" (click)="resetData()">Reset</button>
 </form>
 
    </div>
    <div class="table-section">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
+    </mat-form-field>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
       <!-- Position Column -->
       <ng-container matColumnDef="firstName">
@@ -58,7 +62,7 @@
         <button mat-icon-button color="warn" (click) = "editData(element)"matTooltip="edit"> <mat-icon>edit</mat-icon>
 
         </button>
-        <button mat-icon-button color="warn" (click) = "deleteData()"matTooltip="delete"> <mat-icon>delete</mat-icon>
+        <button mat-icon-button color="warn" (click) = "deleteData(element)"matTooltip="delete"> <mat-icon>delete</mat-icon>
 
         </button>
       </td>
