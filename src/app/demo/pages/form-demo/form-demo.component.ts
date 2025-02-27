@@ -33,7 +33,8 @@ export class FormDemoComponent implements OnInit {
       @ViewChild(MatSort) sort: MatSort;
 
       saveButtonLabel = 'Save';
-input: any;
+      mode = 'save';
+
 
  constructor(private fb: FormBuilder,private demoService : FormDemoServiceService){
     this.demoForm = this.fb.group({
@@ -82,6 +83,7 @@ public resetData(): void {
 public editData(data:any): void {
   this.demoForm.patchValue(data);
   this.saveButtonLabel = "Edit";
+  this.mode = 'edit';
 }
 public deleteData(data:any): void {
 
