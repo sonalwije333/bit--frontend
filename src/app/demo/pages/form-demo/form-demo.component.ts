@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder,FormGroup,FormControl } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { FormDemoServiceService } from 'src/app/services/form-demo/form-demo-service.service';
 
@@ -27,6 +29,9 @@ export class FormDemoComponent implements OnInit {
       demoForm: FormGroup;
       displayedColumns: string[] = ['firstName', 'lastName', 'age', 'email', 'actions'];
       dataSource = new MatTableDataSource<any>;
+      @ViewChild(MatPaginator) paginator: MatPaginator;
+      @ViewChild(MatSort) sort: MatSort;
+
       saveButtonLabel = 'Save';
 input: any;
 
@@ -52,6 +57,8 @@ public populateData(): void{
        console.log('get data response' , response);
 
        this.dataSource = new MatTableDataSource(response);
+       this.dataSource.paginator = this.paginator;
+       this.dataSource.sort =this.sort;
     });
 }
 
@@ -83,5 +90,10 @@ public deleteData(data:any): void {
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
+
+  if (this.dataSource.paginator) {
+    this.dataSource.paginator.firstPage();
+  }
+
 }
 }
