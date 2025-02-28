@@ -33,7 +33,8 @@ export class FormDemoComponent implements OnInit {
       @ViewChild(MatSort) sort: MatSort;
 
       saveButtonLabel = 'Save';
-      mode = 'save';
+      mode = 'add';
+      selectedData;
 
 
  constructor(private fb: FormBuilder,private demoService : FormDemoServiceService){
@@ -68,10 +69,17 @@ onSubmit(){
     console.log('form submitted');
     console.log(this.demoForm.value);
 
+    if(this.mode == 'add'){
+      this.demoService.serviceCall(this.demoForm.value).subscribe((response)=>{
+        console.log('server response: ' , response);
+   });
+    } else if (this.mode === 'edit'){
+       this.demoService.editData(this.selectedData?.id, this.demoForm.value).subscribe((response) =>{
+         console.log('server response edit : ' , response);
+       });
+    }
+//selectedData?.id  here reads the value  if the data is exists
 
-    this.demoService.serviceCall(this.demoForm.value).subscribe((response)=>{
-         console.log('server response: ' , response);
-    });
 }
 
 
@@ -84,6 +92,7 @@ public editData(data:any): void {
   this.demoForm.patchValue(data);
   this.saveButtonLabel = "Edit";
   this.mode = 'edit';
+  this.selectedData = data;
 }
 public deleteData(data:any): void {
 

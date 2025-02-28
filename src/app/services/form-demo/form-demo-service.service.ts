@@ -48,4 +48,20 @@ console.log("get data");
 
   return this.http.get(requestUrl, { headers: headers });
 }
-}
+
+
+
+editData(id: number, form_details:any){
+  console.log('In edit data');
+
+  const requestUrl = environment.baseUrl + '/form-demo/' + id.toString();
+  let headers = {};
+  if (this.httpService.getAuthToken() !== null) {
+    headers = {
+      Authorization: 'Bearer ' + this.httpService.getAuthToken(),
+    };
+  }
+
+  return this.http.post(requestUrl,form_details,  { headers: headers });
+}}
+
