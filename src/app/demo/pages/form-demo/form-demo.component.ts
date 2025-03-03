@@ -13,12 +13,6 @@ export interface PeriodicElement {
   symbol: string;
 }
 
-// const ELEMENT_DATA: any[] = [
-//   { firstName: 1, lastName: 'Hydrogen', age: 1.0079, email: 'H'},
-
-// ];
-
-
 @Component({
   selector: 'app-form-demo',
   standalone: false,
@@ -35,6 +29,8 @@ export class FormDemoComponent implements OnInit {
       saveButtonLabel = 'Save';
       mode = 'add';
       selectedData;
+      isButtonDisabled: boolean = false;
+
 
 
  constructor(private fb: FormBuilder,private demoService : FormDemoServiceService){
@@ -63,29 +59,37 @@ public populateData(): void{
        this.dataSource.sort =this.sort;
     });
 }
-
-
 onSubmit(){
+    console.log('Mode' + this.mode)
     console.log('form submitted');
     console.log(this.demoForm.value);
 
     if(this.mode == 'add'){
       this.demoService.serviceCall(this.demoForm.value).subscribe((response)=>{
-        console.log('server response: ' , response);
+
+        if(this.dataSource && this.dataSource.data && this.dataSource.data.length>0){
+             this.dataSource = new MatTableDataSource([response, ...this.dataSource.data])
+        } else{
+          this.dataSource = new MatTableDataSource([response]); //input data goes to the top of the display
+        }
    });
+
     } else if (this.mode === 'edit'){
        this.demoService.editData(this.selectedData?.id, this.demoForm.value).subscribe((response) =>{
-         console.log('server response edit : ' , response);
+         let elementIndex = this.dataSource.data.findIndex((element) => element.id === this.selectedData?.id);
+         this.dataSource.data[elementIndex] = response;
+         this.dataSource = new MatTableDataSource(this.dataSource.data);
        });
     }
-//selectedData?.id  here reads the value  if the data is exists
-
+      this.mode = 'add';
+      this.demoForm.disable(); // automatically disable the form after submitting form data
+      this.isButtonDisabled = true;
 }
-
-
 public resetData(): void {
   this.demoForm.reset();
   this.saveButtonLabel = "Save";
+  this.demoForm.enable();
+  this.isButtonDisabled = false;
 }
 
 public editData(data:any): void {
@@ -94,8 +98,21 @@ public editData(data:any): void {
   this.mode = 'edit';
   this.selectedData = data;
 }
+
 public deleteData(data:any): void {
 
+// data delete implementation
+
+const id = data.id;
+
+this.demoService.deleteData(id).subscribe((response) => {
+const index = this.dataSource.data.findIndex((element) => element.id == id);
+if(index !== -1){
+   this.dataSource.data.splice( index,1 );
+}
+this.dataSource = new MatTableDataSource(this.dataSource.data);
+
+});
 }
 
 applyFilter(event: Event) {
@@ -103,8 +120,13 @@ applyFilter(event: Event) {
   this.dataSource.filter = filterValue.trim().toLowerCase();
 
   if (this.dataSource.paginator) {
-    this.dataSource.paginator.firstPage();
+     this.dataSource.paginator.firstPage();
+  }}
+
+  public refreshData(): void {
+     this.populateData();
   }
 
-}
+
+
 }

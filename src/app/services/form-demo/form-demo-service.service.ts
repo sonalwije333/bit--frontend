@@ -63,5 +63,22 @@ editData(id: number, form_details:any){
   }
 
   return this.http.post(requestUrl,form_details,  { headers: headers });
+}
+
+deleteData(id: number){
+
+console.log('In Delete data');
+
+const requestUrl = environment.baseUrl + '/form-demo/' + id.toString();
+let headers = {};
+if (this.httpService.getAuthToken() !== null) {
+  headers = {
+    Authorization: 'Bearer ' + this.httpService.getAuthToken(),
+  };
+}
+
+return this.http.delete(requestUrl,  { headers: headers });
+
+
 }}
 
