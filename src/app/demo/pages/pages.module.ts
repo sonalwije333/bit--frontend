@@ -7,10 +7,12 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { TestComponent } from './test/test.component';
 import { MaterialModule } from 'src/app/material.module';
 import { FormDemoComponent } from './form-demo/form-demo.component';
+import { CustomerComponent } from './customer/customer.component';
+
 // icons
 
 @NgModule({
-  declarations: [TestComponent,FormDemoComponent],
+  declarations: [TestComponent,FormDemoComponent,CustomerComponent],
   imports: [CommonModule, FormsModule, NgApexchartsModule, RouterModule.forChild(PagesRoutes), MaterialModule,ReactiveFormsModule],
   exports: []
 })

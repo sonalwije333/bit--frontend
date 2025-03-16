@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { TestComponent } from './test/test.component';
 import { FormDemoComponent } from './form-demo/form-demo.component';
+import { CustomerComponent } from './customer/customer.component';
 
 export const PagesRoutes: Routes = [
   {
@@ -15,6 +16,10 @@ export const PagesRoutes: Routes = [
   {
     path: 'form-demo',
     component: FormDemoComponent
+  },
+  {
+    path: 'customer',
+    component: CustomerComponent
   }
 
 ];
