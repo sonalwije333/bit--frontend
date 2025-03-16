@@ -93,6 +93,26 @@ export const NavigationItems: NavigationItem[] = [
       }
     ]
   },
+
+  {
+    id: 'customer',  //created customer
+    title: 'Customer',
+    type: 'group',
+    icon: 'icon-navigation',
+    auth: authenticationEnum.Home,
+    children: [
+      {
+        id: 'customerDet',
+        title: 'Customer',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/pages/customer',
+        icon: 'dashboard',
+        auth: authenticationEnum.Home,
+        breadcrumbs: false
+      }
+    ]
+  },
   {
     id: 'authentication',
     title: 'Authentication',
