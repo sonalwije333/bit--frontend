@@ -1,1 +1,73 @@
-<p>customer works!</p>
+
+
+<div class="container">
+  <div class="form-section">
+    <form class="example-form" [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+
+      <!-- First Name -->
+      <mat-form-field class="full-width">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First Name" formControlName="firstName">
+        <!-- <span class="text-danger" *ngIf="(customerForm.get('firstName').touched || submitted) && customerForm.get('firstName').errors?.['required']">
+          First name is required*
+        </span> -->
+      </mat-form-field>
+
+
+      <!-- Last Name -->
+      <mat-form-field class="full-width">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last Name" formControlName="lastName">
+        <!-- <span class="text-danger" *ngIf="(customerForm.get('lastName').touched || submitted) && customerForm.get('lastName').errors?.['required']">
+          Last name is required*
+        </span>
+        <span class="text-danger" *ngIf="(customerForm.get('lastName').touched || submitted) && customerForm.get('lastName').errors?.['minlength']">
+          Min length for Last Name is three characters*
+        </span>
+        <span class="text-danger" *ngIf="(customerForm.get('lastName').touched || submitted) && customerForm.get('lastName').errors?.['maxlength']">
+          Max length for Last Name is 8 characters*
+        </span> -->
+      </mat-form-field>
+
+
+      <!-- Age -->
+      <mat-form-field class="full-width">
+        <mat-label>Age</mat-label>
+        <input matInput placeholder="Age" formControlName="age" type="number">
+        <!-- <span class="text-danger" *ngIf="(customerForm.get('age').touched || submitted) && customerForm.get('age').errors?.['min']">
+          Age must be greater than 14*
+        </span>
+        <span class="text-danger" *ngIf="(customerForm.get('age').touched || submitted) && customerForm.get('age').errors?.['max']">
+          Age must be less than 120*
+        </span> -->
+      </mat-form-field>
+
+
+      <!-- Email -->
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email">
+        <!-- <span class="text-danger" *ngIf="(customerForm.get('email').touched || submitted) && customerForm.get('email').errors?.['pattern']">
+          Please insert a valid email*
+        </span> -->
+      </mat-form-field>
+
+
+
+
+      
+      <!-- Register Button -->
+      <button type="submit" mat-raised-button color="primary" class="form-button" >
+        Register
+      </button>
+
+
+      <!-- Reset Button -->
+      <button type="button" mat-raised-button color="secondary" class="form-button" >
+        Reset
+      </button>
+
+
+    </form>
+  </div>
+</div>
