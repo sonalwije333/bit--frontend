@@ -40,7 +40,23 @@
         <span class="text-danger" *ngIf="(customerForm.get('age').touched || submitted) && customerForm.get('age').errors?.['max']">
           Age must be less than 120*
         </span> -->
-      </mat-form-field>
+   </mat-form-field>
+
+
+     <!-- Gender Dropdown -->
+     <mat-form-field class="full-width">
+        <mat-label>Gender</mat-label>
+     <mat-select formControlName="gender">
+     <mat-option value="male">Male</mat-option>
+     <mat-option value="female">Female</mat-option>
+    </mat-select>
+  <!-- Validation Message -->
+   <!-- <span class="text-danger" >
+    Gender is required*
+   </span> -->
+    </mat-form-field>
+
+
 
 
       <!-- Email -->
@@ -52,10 +68,30 @@
         </span> -->
       </mat-form-field>
 
+    <!-- Phone Number (Required & Validated) -->
+<mat-form-field class="full-width">
+  <mat-label>Phone Number</mat-label>
+  <input matInput placeholder="Phone Number" formControlName="phoneNumber" type="tel">
+  <!-- <span class="text-danger" >
+    Phone number is required*
+  </span> -->
+  <!-- <span class="text-danger" >
+    Enter a valid phone number (e.g., 123-456-7890)*
+  </span> -->
+</mat-form-field>
+
+<!-- Address (Required Text Input) -->
+<mat-form-field class="full-width">
+  <mat-label>Address</mat-label>
+  <input matInput placeholder="Address" formControlName="address">
+  <!-- <span class="text-danger" >
+    Address is required*
+  </span> -->
+</mat-form-field>
 
 
 
-      
+
       <!-- Register Button -->
       <button type="submit" mat-raised-button color="primary" class="form-button" >
         Register
