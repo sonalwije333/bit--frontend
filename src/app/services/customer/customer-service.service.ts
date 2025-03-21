@@ -15,11 +15,11 @@ export class FormDemoServiceService {
 
 
               /* http client*/
-             /* hGet,POST,Delete, Put*/
+             /* GET,POST,Delete, Put*/
    }
    serviceCall(form_details: any = {}) {
     console.log("In the service");
-    const requestUrl = environment.baseUrl + '/form-demo';   //http://localhost:8080/form-demo
+    const requestUrl = environment.baseUrl + '/form-demo';   //http://localhost:8080/customer
     let headers = {};
 
     if (this.httpService.getAuthToken() !== null) {
