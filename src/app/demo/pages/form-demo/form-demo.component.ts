@@ -33,7 +33,7 @@ export class FormDemoComponent implements OnInit {
       mode = 'add';
       selectedData;
       isButtonDisabled: boolean = false;
-submitted: any;
+      submitted: any;
 
 
 
@@ -48,7 +48,7 @@ submitted: any;
           firstName: new FormControl('' , Validators.required),
           lastName: new FormControl('' ,  [Validators.required,Validators.minLength(3), Validators.maxLength(8)]),
           age: new FormControl('', [Validators.required,Validators.min(14),Validators.max(120), this.customeAgeValidator]),
-          email: new FormControl('' , [Validators.required,Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$ ')]  ) //Validators.email
+          email: new FormControl('' , [Validators.required,Validators.email]  ) //Validators.email
     });
  }
   ngOnInit(): void {
