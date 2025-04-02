@@ -8,18 +8,18 @@ import { log } from 'console';
 @Injectable({
   providedIn: 'root'
 })
-export class FormDemoServiceService {
+export class CustomerServiceService {
 
   constructor(private http: HttpClient,private httpService: HttpService) {
 
 
 
               /* http client*/
-             /* hGet,POST,Delete, Put*/
+             /* GET,POST,Delete, Put*/
    }
    serviceCall(form_details: any = {}) {
     console.log("In the service");
-    const requestUrl = environment.baseUrl + '/form-demo';   //http://localhost:8080/form-demo
+    const requestUrl = environment.baseUrl + '/customer';   //http://localhost:8080/customer
     let headers = {};
 
     if (this.httpService.getAuthToken() !== null) {
@@ -38,7 +38,7 @@ getData()
 {
 console.log("get data");
 
-  const requestUrl = environment.baseUrl + '/form-demo';   //http://localhost:8080/form-demo
+  const requestUrl = environment.baseUrl + '/customer';   //http://localhost:8080/customer
   let headers = {};
   if (this.httpService.getAuthToken() !== null) {
     headers = {
@@ -54,7 +54,7 @@ console.log("get data");
 editData(id: number, form_details:any){
   console.log('In edit data');
 
-  const requestUrl = environment.baseUrl + '/form-demo/' + id.toString();
+  const requestUrl = environment.baseUrl + '/customer/' + id.toString();
   let headers = {};
   if (this.httpService.getAuthToken() !== null) {
     headers = {
@@ -69,7 +69,7 @@ deleteData(id: number){
 
 console.log('In Delete data');
 
-const requestUrl = environment.baseUrl + '/form-demo/' + id.toString();
+const requestUrl = environment.baseUrl + '/customer/' + id.toString();
 let headers = {};
 if (this.httpService.getAuthToken() !== null) {
   headers = {
