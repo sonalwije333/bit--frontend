@@ -11,7 +11,6 @@ import { MessageServiceService } from 'src/app/services/message-service/message-
 export interface PeriodicElement {
   name: string;
   position: number;
-
   weight: number;
   symbol: string;
 }
