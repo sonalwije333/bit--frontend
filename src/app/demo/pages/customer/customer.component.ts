@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup,FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup,FormControl, Validators, AbstractControl, FormGroupDirective } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -49,7 +49,7 @@ export class CustomerComponent implements OnInit{
       age: new FormControl('', [Validators.required,Validators.min(14),Validators.max(120)]),
       gender: new FormControl('', [Validators.required]),
       email: new FormControl('' , [Validators.required,Validators.email]),
-      phoneNumber: new FormControl('', [Validators.minLength(10),Validators.maxLength(10)]),
+      phoneNumber: new FormControl('', [ Validators.required,Validators.pattern('^[0-9]{10}$')  ]),
       address: new FormControl('', [Validators.required,Validators.min(14),Validators.max(120)]),
     });
   }
@@ -143,7 +143,8 @@ export class CustomerComponent implements OnInit{
     }
   }
 
-  public resetData(): void {
+  public resetData(formDirective:FormGroupDirective): void {
+    formDirective.resetForm()
     this.customerForm.reset();
     this.customerForm.setErrors = null;
     this.customerForm.updateValueAndValidity();
@@ -165,7 +166,7 @@ public deleteData(data:any): void {
   const id = data.id;
   try{
     this.demoService.deleteData(id).subscribe({
-      next: (response: any)=>{
+      next: (_response: any)=>{
         const index = this.dataSource.data.findIndex((element) => element.id == id);
         if(index !== -1){
            this.dataSource.data.splice( index,1 );

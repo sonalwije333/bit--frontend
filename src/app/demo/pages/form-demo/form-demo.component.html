@@ -2,7 +2,7 @@
 <div class="container">
   <div class="form-section">
     <!-- demo-Form -->
-    <form class="example-form" [formGroup]="demoForm" (ngSubmit)="onSubmit()">
+    <form class="example-form" [formGroup]="demoForm" (ngSubmit)="onSubmit()" #formDirective="ngForm">
 
       <!-- First Name Field -->
       <mat-form-field class="full-width">
@@ -61,7 +61,7 @@
       </button>
 
       <!-- Reset Button -->
-      <button type="button" mat-raised-button color="secondary" class="form-button" (click)="resetData()">
+      <button type="button" mat-raised-button color="secondary" class="form-button" (click)="resetData(formDirective)">
         Reset
       </button>
 
@@ -135,5 +135,5 @@
 
     <!-- Pagination -->
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
-  </div> 
+  </div>
 </div>

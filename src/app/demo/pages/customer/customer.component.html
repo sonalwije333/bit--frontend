@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="form-section">
-    <form class="example-form" [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+    <form class="example-form" [formGroup]="customerForm" (ngSubmit)="onSubmit()" #formDirective="ngForm">
 
       <!-- First Name -->
       <mat-form-field class="full-width">
@@ -71,7 +71,7 @@
         </span>
       </mat-form-field>
 
-    <!-- Phone Number (Required & Validated) -->
+    <!-- Phone Number  -->
 <mat-form-field class="full-width">
   <mat-label>Phone Number</mat-label>
   <input matInput placeholder="Phone Number" formControlName="phoneNumber">
@@ -91,11 +91,11 @@
 </mat-form-field>
 
       <!-- Register Button -->
-      <button type="submit" mat-raised-button color="primary" class="form-button" >
+      <button type="submit" mat-raised-button color="primary" class="form-button" > {{saveButtonLabel}}
         Register
       </button>
       <!-- Reset Button -->
-      <button type="button" mat-raised-button color="secondary" class="form-button" >
+      <button type="button" mat-raised-button color="secondary" class="form-button" (click)="resetData(formDirective)">
         Reset
       </button>
 

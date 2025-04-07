@@ -1,6 +1,6 @@
 import { MessageServiceService } from 'src/app/services/message-service/message-service.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder,FormGroup,FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder,FormGroup,FormControl, Validators, AbstractControl, FormGroupDirective } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -110,7 +110,7 @@ public populateData(): void{
 
 onSubmit(){
   try{
-    console.log('Mode' + this.mode);
+    console.log('Mode ' + this.mode);
     console.log('form submitted');
     console.log(this.demoForm.value);
 
@@ -149,9 +149,11 @@ onSubmit(){
       //    this.MessageService.showSuccess('Data  edited successfully!');
 
       //  });
+      console.log('Mode ' + this.mode);
 
       this.demoService.editData(this.selectedData?.id, this.demoForm.value).subscribe({
           next: (response: any)=>{
+            console.log("put data Server Response", response);
          let elementIndex = this.dataSource.data.findIndex((element) => element.id === this.selectedData?.id);
          this.dataSource.data[elementIndex] = response;
          this.dataSource = new MatTableDataSource(this.dataSource.data);
@@ -170,8 +172,9 @@ onSubmit(){
         this.MessageService.showError('Action failed with error' + error);
   }
 }
-public resetData(): void {
+public resetData(formDirective:FormGroupDirective): void {
   this.demoForm.reset();
+  formDirective.resetForm()
   this.demoForm.setErrors = null;
   this.demoForm.updateValueAndValidity();
   this.saveButtonLabel = 'save';
