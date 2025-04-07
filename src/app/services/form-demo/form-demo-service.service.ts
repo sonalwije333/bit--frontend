@@ -62,7 +62,7 @@ editData(id: number, form_details:any){
     };
   }
 
-  return this.http.post(requestUrl,form_details,  { headers: headers });
+  return this.http.put(requestUrl,form_details,  { headers: headers }); //edit data karaddi api use kranne put mapping
 }
 
 deleteData(id: number){

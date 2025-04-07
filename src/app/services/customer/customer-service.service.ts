@@ -17,6 +17,8 @@ export class CustomerServiceService {
               /* http client*/
              /* GET,POST,Delete, Put*/
    }
+
+
    serviceCall(form_details: any = {}) {
     console.log("In the service");
     const requestUrl = environment.baseUrl + '/customer';   //http://localhost:8080/customer
@@ -62,7 +64,7 @@ editData(id: number, form_details:any){
     };
   }
 
-  return this.http.post(requestUrl,form_details,  { headers: headers });
+  return this.http.put(requestUrl,form_details,  { headers: headers });  //added put to avoid the error adding extra  data when editing
 }
 
 deleteData(id: number){
@@ -78,7 +80,6 @@ if (this.httpService.getAuthToken() !== null) {
 }
 
 return this.http.delete(requestUrl,  { headers: headers });
-
 
 }}
 
