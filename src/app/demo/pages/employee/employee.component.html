@@ -1,4 +1,5 @@
 <div class="container">
+<<<<<<< Updated upstream
   <div class="example-form">
 
       <!-- image Upload -->
@@ -14,10 +15,45 @@
       <input matInput placeholder="First Name" >
 
     </mat-form-field>
+=======
+  <div class="form-section">
+    <form class="example-form" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+
+      <!-- Image Upload -->
+      <mat-form-field class="full-width">
+        <mat-label>Upload Image</mat-label>
+        <input type="file" (change)="onImageSelected($event)" accept="image/*">
+      </mat-form-field>
+
+      <!-- Employee Number (Auto-generated, Readonly) -->
+      <mat-form-field class="full-width">
+        <mat-label>Employee No</mat-label>
+        <input matInput formControlName="emp_no" readonly>
+      </mat-form-field>
+
+      <!-- Full Name -->
+      <mat-form-field class="full-width">
+        <mat-label>Full Name</mat-label>
+        <input matInput placeholder="Full Name" formControlName="fullName">
+        <span class="text-danger" *ngIf="(employeeForm.get('fullName').touched || submitted) && employeeForm.get('fullName').errors?.['required']">
+          Full name is required*
+        </span>
+      </mat-form-field>
+
+      <!-- First Name -->
+      <mat-form-field class="full-width">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName">
+        <span class="text-danger" *ngIf="(employeeForm.get('firstName').touched || submitted) && employeeForm.get('firstName').errors?.['required']">
+          First name is required*
+        </span>
+      </mat-form-field>
+>>>>>>> Stashed changes
 
       <!-- Last Name -->
       <mat-form-field class="full-width">
         <mat-label>Last Name</mat-label>
+<<<<<<< Updated upstream
         <input matInput placeholder="Last Name" >
 
 
@@ -72,10 +108,73 @@
       <mat-label>Phone Number</mat-label>
       <input matInput placeholder="Phone Number" >
     </mat-form-field>
+=======
+        <input matInput formControlName="lastName">
+        <span class="text-danger" *ngIf="(employeeForm.get('lastName').touched || submitted) && employeeForm.get('lastName').errors?.['required']">
+          Last name is required*
+        </span>
+      </mat-form-field>
+
+      <!-- NIC -->
+      <mat-form-field class="full-width">
+        <mat-label>NIC</mat-label>
+        <input matInput formControlName="nic">
+        <span class="text-danger" *ngIf="(employeeForm.get('nic').touched || submitted) && employeeForm.get('nic').errors?.['required']">
+          NIC is required*
+        </span>
+      </mat-form-field>
+
+      <!-- Role -->
+      <mat-form-field class="full-width">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="manager">Manager</mat-option>
+          <mat-option value="pharmacist">Pharmacist</mat-option>
+          <mat-option value="cashier">Cashier</mat-option>
+        </mat-select>
+        <span class="text-danger" *ngIf="(employeeForm.get('role').touched || submitted) && employeeForm.get('role').errors?.['required']">
+          Role is required*
+        </span>
+      </mat-form-field>
+
+      <!-- Birthdate -->
+      <mat-form-field class="full-width">
+        <mat-label>Birthdate</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthdate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <span class="text-danger" *ngIf="(employeeForm.get('birthdate').touched || submitted) && employeeForm.get('birthdate').errors?.['required']">
+          Birthdate is required*
+        </span>
+      </mat-form-field>
+
+      <!-- Age -->
+      <mat-form-field class="full-width">
+        <mat-label>Age</mat-label>
+        <input matInput type="number" formControlName="age">
+        <span class="text-danger" *ngIf="(employeeForm.get('age').touched || submitted) && employeeForm.get('age').errors?.['required']">
+          Age is required*
+        </span>
+      </mat-form-field>
+
+      <!-- Gender Dropdown -->
+      <mat-form-field class="full-width">
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="male">Male</mat-option>
+          <mat-option value="female">Female</mat-option>
+          <mat-option value="other">Other</mat-option>
+        </mat-select>
+        <span class="text-danger" *ngIf="(employeeForm.get('gender').touched || submitted) && employeeForm.get('gender').errors?.['required']">
+          Gender is required*
+        </span>
+      </mat-form-field>
+>>>>>>> Stashed changes
 
       <!-- Email -->
       <mat-form-field class="full-width">
         <mat-label>Email</mat-label>
+<<<<<<< Updated upstream
         <input matInput placeholder="Email" >
       </mat-form-field>
 
@@ -94,5 +193,38 @@
 
 
 
+=======
+        <input matInput formControlName="email">
+        <span class="text-danger" *ngIf="(employeeForm.get('email').touched || submitted) && employeeForm.get('email').errors?.['email']">
+          Enter a valid email*
+        </span>
+      </mat-form-field>
+
+      <!-- Phone Number -->
+      <mat-form-field class="full-width">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phoneNumber">
+        <span class="text-danger" *ngIf="(employeeForm.get('phoneNumber').touched || submitted) && employeeForm.get('phoneNumber').errors?.['required']">
+          Phone number is required*
+        </span>
+      </mat-form-field>
+
+      <!-- Address -->
+      <mat-form-field class="full-width">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address">
+        <span class="text-danger" *ngIf="(employeeForm.get('address').touched || submitted) && employeeForm.get('address').errors?.['required']">
+          Address is required*
+        </span>
+      </mat-form-field>
+
+      <!-- Submit & Reset -->
+      <div class="button-group">
+        <button type="submit" mat-raised-button color="primary">Register</button>
+        <button type="button" mat-raised-button color="warn" (click)="resetForm()">Reset</button>
+      </div>
+
+    </form>
+>>>>>>> Stashed changes
   </div>
 </div>

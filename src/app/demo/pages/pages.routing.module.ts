@@ -3,6 +3,10 @@ import { TestComponent } from './test/test.component';
 import { FormDemoComponent } from './form-demo/form-demo.component';
 import { CustomerComponent } from './customer/customer.component';
 import { EmployeeComponent } from './employee/employee.component';
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 export const PagesRoutes: Routes = [
   {
@@ -21,11 +25,18 @@ export const PagesRoutes: Routes = [
   {
     path: 'customer',
     component: CustomerComponent
+  },
+  {
+    path: 'employee',
+    component: EmployeeComponent
   }
+<<<<<<< Updated upstream
   ,
   {
     path: 'employee',
     component: EmployeeComponent
   }
 
+=======
+>>>>>>> Stashed changes
 ];

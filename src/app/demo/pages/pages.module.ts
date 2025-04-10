@@ -9,6 +9,10 @@ import { MaterialModule } from 'src/app/material.module';
 import { FormDemoComponent } from './form-demo/form-demo.component';
 import { CustomerComponent } from './customer/customer.component';
 import { EmployeeComponent } from './employee/employee.component';
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 // icons
 
