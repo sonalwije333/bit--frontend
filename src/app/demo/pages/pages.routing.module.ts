@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { TestComponent } from './test/test.component';
 import { FormDemoComponent } from './form-demo/form-demo.component';
 import { CustomerComponent } from './customer/customer.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 export const PagesRoutes: Routes = [
   {
@@ -22,4 +23,9 @@ export const PagesRoutes: Routes = [
     component: CustomerComponent
   }
 
+  ,
+  {
+    path: 'employee',
+    component: EmployeeComponent
+  }
 ];

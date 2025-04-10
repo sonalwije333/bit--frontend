@@ -113,6 +113,28 @@ export const NavigationItems: NavigationItem[] = [
       }
     ]
   },
+
+
+
+  {
+    id: 'employee',  //created employee
+    title: 'Employee',
+    type: 'group',
+    icon: 'icon-navigation',
+    auth: authenticationEnum.Home,
+    children: [
+      {
+        id: 'employeeDet',
+        title: 'Employee',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/pages/employee',
+        icon: 'dashboard',
+        auth: authenticationEnum.Home,
+        breadcrumbs: false
+      }
+    ]
+  },
   {
     id: 'authentication',
     title: 'Authentication',
