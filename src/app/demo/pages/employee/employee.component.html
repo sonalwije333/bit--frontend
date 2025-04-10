@@ -1,48 +1,48 @@
 <div class="container">
-  <div class="form-section">
+  <div class="form-section" [formGroup]="employeeForm" (ngSubmit)="onSubmit()" #formDirective="ngForm">
 
        <!-- image Upload -->
        <mat-form-field class="full-width">
         <mat-label>Image Upload</mat-label>
-        <input matInput placeholder="Image upload" >
+        <input matInput placeholder="Image upload" formControlName="imageUpload" >
       </mat-form-field>
 
          <!-- Emp_no -->
          <mat-form-field class="full-width">
           <mat-label>Employee Number</mat-label>
-          <input matInput placeholder="Employee Number" >
+          <input matInput placeholder="Employee Number" formControlName="employeeNumber" >
         </mat-form-field>
 
         <!-- Full Name -->
         <mat-form-field class="full-width">
           <mat-label>Full Name</mat-label>
-          <input matInput placeholder="Full Name" >
+          <input matInput placeholder="Full Name"formControlName="fullName">
         </mat-form-field>
 
       <!-- First Name -->
       <mat-form-field class="full-width">
         <mat-label>First Name</mat-label>
-        <input matInput placeholder="First Name" >
+        <input matInput placeholder="First Name" formControlName="firstName" >
       </mat-form-field>
 
 
       <!-- Last Name -->
       <mat-form-field class="full-width">
         <mat-label>Last Name</mat-label>
-        <input matInput placeholder="Last Name" >
+        <input matInput placeholder="Last Name" formControlName="lastName">
       </mat-form-field>
 
 
               <!-- NIC -->
               <mat-form-field class="full-width">
                 <mat-label>NIC</mat-label>
-                <input matInput placeholder="NiC" >
+                <input matInput placeholder="NiC" formControlName="nic">
               </mat-form-field>
 
-                   <!-- Gender Dropdown -->
+                   <!-- Role Dropdown -->
                <mat-form-field class="full-width">
                 <mat-label>Role</mat-label>
-                   <mat-select formControlName="gender">
+                   <mat-select formControlName="role">
                   <mat-option value="role1">A</mat-option>
                      <mat-option value="role2">B</mat-option>
                </mat-select>
@@ -51,7 +51,7 @@
       <!-- Age -->
       <mat-form-field class="full-width">
         <mat-label>Age</mat-label>
-        <input matInput placeholder="Age"  type="number">
+        <input matInput placeholder="Age"  type="number" formControlName="age">
    </mat-form-field>
 
 
@@ -67,21 +67,21 @@
 <!-- Address-->
 <mat-form-field class="full-width">
   <mat-label>Address</mat-label>
-  <input matInput placeholder="Address" >
+  <input matInput placeholder="Address" formControlName="address" >
 </mat-form-field>
 
 
     <!-- Phone Number  -->
 <mat-form-field class="full-width">
   <mat-label>Phone Number</mat-label>
-  <input matInput placeholder="Phone Number" >
+  <input matInput placeholder="Phone Number" formControlName="phoneNumber" >
 </mat-form-field>
 
 
       <!-- Email -->
       <mat-form-field class="full-width">
         <mat-label>Email</mat-label>
-        <input matInput placeholder="Email" >
+        <input matInput placeholder="Email" formControlName="email">
       </mat-form-field>
 
         <!-- Pharmacist regno -->
@@ -89,8 +89,18 @@
             <!-- Emergency Contact Number  -->
 <mat-form-field class="full-width">
   <mat-label>Phone Number</mat-label>
-  <input matInput placeholder="Phone Number" >
+  <input matInput placeholder="Phone Number" formControlName="emergencyPhoneNumber">
 </mat-form-field>
+
+      <!-- Register Button -->
+      <button type="submit" mat-raised-button color="primary" class="form-button" > {{saveButtonLabel}}
+        Register
+      </button>
+      <!-- Reset Button -->
+      <button type="button" mat-raised-button color="secondary" class="form-button" (click)="resetData(formDirective)">
+        Reset
+      </button>
+
 
 
 
