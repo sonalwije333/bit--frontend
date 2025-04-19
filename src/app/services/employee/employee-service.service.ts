@@ -62,7 +62,7 @@ Authorization: 'Bearer ' + this.httpService.getAuthToken(),
 };
 }
 
-return this.http.put(requestUrl,form_details,  { headers: headers });  //added put to avoid the error adding extra  data when editing
+return this.http.put(requestUrl,form_details,  { headers: headers });  
 }
 
 deleteData(id: number){

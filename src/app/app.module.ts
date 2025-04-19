@@ -2,6 +2,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker'; //date picker
+import { MatNativeDateModule } from '@angular/material/core';   //date picker
 
 // project import
 import { AppRoutingModule } from './app-routing.module';
@@ -15,7 +17,8 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, BrowserAnimationsModule, MaterialModule, ToastrModule.forRoot()],
+  imports: [BrowserModule, AppRoutingModule, SharedModule, BrowserAnimationsModule, MaterialModule, ToastrModule.forRoot(),MatDatepickerModule,
+    MatNativeDateModule],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

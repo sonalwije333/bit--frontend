@@ -21,9 +21,7 @@ export const PagesRoutes: Routes = [
   {
     path: 'customer',
     component: CustomerComponent
-  }
-
-  ,
+  },
   {
     path: 'employee',
     component: EmployeeComponent

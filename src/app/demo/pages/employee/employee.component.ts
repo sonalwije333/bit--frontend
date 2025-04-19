@@ -15,11 +15,10 @@ import { MessageServiceService } from 'src/app/services/message-service/message-
 export class EmployeeComponent implements OnInit{
 
  employeeForm: FormGroup;
-
+ displayedColumns: string[] = ['firstName', 'lastName', 'age','gender','email','phoneNumber','address', 'actions'];
   dataSource = new MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
 
   saveButtonLabel = 'Save';
   mode = 'add';
@@ -27,6 +26,7 @@ export class EmployeeComponent implements OnInit{
   isButtonDisabled: boolean = false;
   submitted: boolean;
   customerService: any;
+customerForm: FormGroup<any>;
   constructor(
     private fb: FormBuilder,
     private demoService: EmployeeServiceService,
@@ -41,6 +41,7 @@ export class EmployeeComponent implements OnInit{
       lastName: new FormControl('' ,  [Validators.required,Validators.minLength(3), Validators.maxLength(8)]),
       nic: new FormControl('' , Validators.required),
       role: new FormControl('' , Validators.required),
+      dateOfBirth: new FormControl('' , Validators.required),
       age: new FormControl('', [Validators.required,Validators.min(14),Validators.max(120)]),
       gender: new FormControl('', [Validators.required]),
       address: new FormControl('', [Validators.required,Validators.min(14),Validators.max(120)]),
@@ -193,4 +194,17 @@ public deleteData(data:any): void {
     public refreshData(): void {
        this.populateData();
        }
-}
+
+     // file upload
+     selectedFileName: string = '';
+
+     onFileChange(event: any): void {
+       const file = event.target.files[0];
+       if (file) {
+         this.selectedFileName = file.name;
+         this.employeeForm.patchValue({
+           imageUpload: file
+         });
+       }
+     }}
+
