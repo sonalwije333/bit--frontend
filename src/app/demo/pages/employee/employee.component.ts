@@ -36,10 +36,10 @@ customerForm: FormGroup<any>;
     this.employeeForm = this.fb.group({
       imageUpload: new FormControl('' , Validators.required),
       employeeNumber: new FormControl('' , Validators.required),
-      fullName: new FormControl('' , Validators.required),
+      fullName: new FormControl('' , Validators.required ),
       firstName: new FormControl('' , Validators.required),
-      lastName: new FormControl('' ,  [Validators.required,Validators.minLength(3), Validators.maxLength(8)]),
-      nic: new FormControl('' , Validators.required),
+      lastName: new FormControl('' ,  Validators.required),
+      nic: new FormControl('' , [Validators.required , Validators.pattern('^([0-9]{9}[vVxX]|[0-9]{12})$') ]),
       role: new FormControl('' , Validators.required),
       dateOfBirth: new FormControl('' , Validators.required),
       age: new FormControl('', [Validators.required,Validators.min(14),Validators.max(120)]),

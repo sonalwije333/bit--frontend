@@ -15,18 +15,26 @@
          <mat-form-field class="full-width">
           <mat-label>Employee Number</mat-label>
           <input matInput placeholder="Employee Number" formControlName="employeeNumber" >
+          <span class="text-danger" *ngIf="(employeeForm.get('employeeNumber').touched || submitted) && employeeForm.get('employeeNumber').errors?.['required']">
+            Employee number is required*
+          </span>  
         </mat-form-field>
 
         <!-- Full Name -->
         <mat-form-field class="full-width">
           <mat-label>Full Name</mat-label>
           <input matInput placeholder="Full Name"formControlName="fullName">
+          <span class="text-danger" *ngIf="(employeeForm.get('fullName').touched || submitted) && employeeForm.get('fullName').errors?.['required']">
+            Full Name is required*</span>
         </mat-form-field>
 
       <!-- First Name -->
       <mat-form-field class="full-width">
         <mat-label>First Name</mat-label>
         <input matInput placeholder="First Name" formControlName="firstName" >
+        <span class="text-danger" *ngIf="(employeeForm.get('firstName').touched || submitted) && employeeForm.get('firstName').errors?.['required']">
+          First name is required*
+        </span>
       </mat-form-field>
 
 
@@ -34,6 +42,9 @@
       <mat-form-field class="full-width">
         <mat-label>Last Name</mat-label>
         <input matInput placeholder="Last Name" formControlName="lastName">
+        <span class="text-danger" *ngIf="(employeeForm.get('lastName').touched || submitted) && employeeForm.get('lastName').errors?.['required']">
+          Last name is required*
+        </span>
       </mat-form-field>
 
 
@@ -41,6 +52,12 @@
               <mat-form-field class="full-width">
                 <mat-label>NIC</mat-label>
                 <input matInput placeholder="NiC" formControlName="nic">
+                <span class="text-danger" *ngIf="(employeeForm.get('nic').touched || submitted) && employeeForm.get('nic').errors?.['required']">
+                  NIC is required*
+                </span>
+                <span class="text-danger" *ngIf="(employeeForm.get('nic').touched || submitted) && employeeForm.get('nic').errors?.['pattern']">
+                  NIC must be a valid format (e.g., 123456789V or 200012345678)*
+                </span> 
               </mat-form-field>
 
                    <!-- Role Dropdown -->
@@ -50,6 +67,9 @@
                   <mat-option value="role1">A</mat-option>
                      <mat-option value="role2">B</mat-option>
                </mat-select>
+               <span class="text-danger" *ngIf="(employeeForm.get('role').touched || submitted) && employeeForm.get('role').errors?.['required']">
+                Role is required*
+              </span>
               </mat-form-field>
 
               <!-- Date of Birth -->
@@ -59,6 +79,9 @@
                 <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <span class="text-danger" *ngIf="(employeeForm.get('dateOfBirth')?.touched || submitted) && employeeForm.get('dateOfBirth')?.errors?.['required']">
+                  Date of birth is required*
+                </span>
               </mat-form-field>
 
 
@@ -66,6 +89,9 @@
       <mat-form-field class="full-width">
         <mat-label>Age</mat-label>
         <input matInput placeholder="Age"  type="number" formControlName="age">
+        <span class="text-danger" *ngIf="(employeeForm.get('age').touched || submitted) && employeeForm.get('age').errors?.['required']">
+          Age is required*
+        </span>
    </mat-form-field>
 
 
@@ -76,6 +102,10 @@
      <mat-option value="male">Male</mat-option>
      <mat-option value="female">Female</mat-option>
     </mat-select>
+
+    <span class="text-danger" *ngIf="(employeeForm.get('gender').touched || submitted) && employeeForm.get('gender').errors?.['required']">
+      Gender is required*
+    </span>
     </mat-form-field>
 
 <!-- Address-->
@@ -89,6 +119,9 @@
 <mat-form-field class="full-width">
   <mat-label>Phone Number</mat-label>
   <input matInput placeholder="Phone Number" formControlName="phoneNumber" >
+  <span class="text-danger" *ngIf="(employeeForm.get('phoneNumber').touched || submitted) && employeeForm.get('phoneNumber').errors?.['required']">
+    Enter a valid phone number*
+  </span>
 </mat-form-field>
 
 
@@ -96,6 +129,9 @@
       <mat-form-field class="full-width">
         <mat-label>Email</mat-label>
         <input matInput placeholder="Email" formControlName="email">
+        <span class="text-danger" *ngIf="(employeeForm.get('email').touched || submitted) && employeeForm.get('email').errors?.['pattern']">
+          Please insert a valid email*
+        </span>
       </mat-form-field>
 
      <!-- Pharmacist regno -->
@@ -104,6 +140,9 @@
 <mat-form-field class="full-width">
   <mat-label>Phone Number</mat-label>
   <input matInput placeholder="Emergency Phone Number" formControlName="emergencyPhoneNumber">
+  <span class="text-danger" *ngIf="(employeeForm.get('email').touched || submitted) && employeeForm.get('email').errors?.['pattern']">
+    Please insert a valid email*
+  </span>
 </mat-form-field>
 
       <!-- Register Button -->

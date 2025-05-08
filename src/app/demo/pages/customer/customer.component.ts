@@ -63,11 +63,9 @@ export class CustomerComponent implements OnInit{
           return null;
         }
         const controlValue = +control.value; // FIXED: Corrected variable name
-
         if (isNaN(controlValue)) {
           return { customAgeValidator: true };
         }
-
         return null;
       }
 
@@ -112,17 +110,13 @@ export class CustomerComponent implements OnInit{
                 } else{
                   this.dataSource = new MatTableDataSource([response]); //input data goes to the top of the display
                 }
-
                 this.MessageService.showSuccess('Data saved successfully!');
            },
            error: (error)=> {
                this.MessageService.showError('Action failed with erro' + error);
            }
   });
-
       } else if (this.mode === 'edit'){
-
-
         this.demoService.editData(this.selectedData?.id, this.customerForm.value).subscribe({
             next: (response: any)=>{
            let elementIndex = this.dataSource.data.findIndex((element) => element.id === this.selectedData?.id);
@@ -142,7 +136,6 @@ export class CustomerComponent implements OnInit{
      this.MessageService.showError('Action failed with error' + error);
     }
   }
-
   public resetData(formDirective:FormGroupDirective): void {
     formDirective.resetForm()
     this.customerForm.reset();
@@ -160,8 +153,6 @@ export class CustomerComponent implements OnInit{
     this.mode = 'edit';
     this.selectedData = data;
   }
-
-
 public deleteData(data:any): void {
   const id = data.id;
   try{
