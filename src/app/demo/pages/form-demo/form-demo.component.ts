@@ -1,11 +1,11 @@
 import { MessageServiceService } from 'src/app/services/message-service/message-service.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder,FormGroup,FormControl, Validators, AbstractControl, FormGroupDirective } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, FormGroupDirective } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { privateDecrypt } from 'crypto';
 import { FormDemoServiceService } from 'src/app/services/form-demo/form-demo-service.service';
+import { log } from 'console';
 
 
 export interface PeriodicElement {
@@ -23,36 +23,38 @@ export interface PeriodicElement {
   styleUrl: './form-demo.component.scss'
 })
 export class FormDemoComponent implements OnInit {
-      demoForm: FormGroup;
-      displayedColumns: string[] = ['firstName', 'lastName', 'age', 'email', 'actions'];
-      dataSource = new MatTableDataSource<any>;
-      @ViewChild(MatPaginator) paginator: MatPaginator;
-      @ViewChild(MatSort) sort: MatSort;
+  demoForm: FormGroup;
+  displayedColumns: string[] = ['firstName', 'lastName', 'age', 'birthDate', 'actions'];
+  dataSource = new MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-      saveButtonLabel = 'Save';
-      mode = 'add';
-      selectedData;
-      isButtonDisabled: boolean = false;
-      submitted: any;
+  saveButtonLabel = 'Save';
+  mode = 'add';
+  selectedData;
+  isButtonDisabled: boolean = false;
+  submitted: any;
+  today: Date = new Date();
 
 
 
- constructor(
-  private fb: FormBuilder,
-  private demoService: FormDemoServiceService,
-  private MessageService: MessageServiceService
+  constructor(
+    private fb: FormBuilder,
+    private demoService: FormDemoServiceService,
+    private MessageService: MessageServiceService
 
-  ){
+  ) {
     // required, min ,max , minL ,pattern, customValidation
     this.demoForm = this.fb.group({
-          firstName: new FormControl('' , Validators.required),
-          lastName: new FormControl('' ,  [Validators.required,Validators.minLength(3), Validators.maxLength(8)]),
-          age: new FormControl('', [Validators.required,Validators.min(14),Validators.max(120), this.customeAgeValidator]),
-          email: new FormControl('' , [Validators.required,Validators.email]  ) //Validators.email
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(8)]),
+      birthDate: new FormControl('',[Validators.required]),
+      age: new FormControl('', [Validators.required, Validators.min(14), Validators.max(120), this.customeAgeValidator]),
+      email: new FormControl('', [Validators.required, Validators.email]) //Validators.email
     });
- }
+  }
   ngOnInit(): void {
-//get data requets
+    //get data requets
     this.populateData();
   }
 
@@ -71,171 +73,206 @@ export class FormDemoComponent implements OnInit {
 
 
 
-// public populateData(): void{
-//     //implemet get data code
-//     //ts -> service file function
-//     // service -> backend call
-//     this.demoService.getData().subscribe((response: any[]) => {
-//        console.log('get data response' , response);
+  // public populateData(): void{
+  //     //implemet get data code
+  //     //ts -> service file function
+  //     // service -> backend call
+  //     this.demoService.getData().subscribe((response: any[]) => {
+  //        console.log('get data response' , response);
 
-//        this.dataSource = new MatTableDataSource(response);
-//        this.dataSource.paginator = this.paginator;
-//        this.dataSource.sort =this.sort;
-//     });
-// }
+  //        this.dataSource = new MatTableDataSource(response);
+  //        this.dataSource.paginator = this.paginator;
+  //        this.dataSource.sort =this.sort;
+  //     });
+  // }
 
 
-public populateData(): void{
-  //implemet get data code
-  //ts -> service file function
-  // service -> backend call
+  public populateData(): void {
+    //implemet get data code
+    //ts -> service file function
+    // service -> backend call
 
-  try{
-    this.demoService.getData().subscribe({
-       next: (dataList: any[]) => {
-         if (dataList.length <= 0){
+    try {
+      this.demoService.getData().subscribe({
+        next: (dataList: any[]) => {
+          if (dataList.length <= 0) {
             return;
-         }
-        this.dataSource = new MatTableDataSource(dataList);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort =this.sort;
-       }, error:(error)=> {
-        this.MessageService.showError('Action failed with error' + error);
-       }
-    });
-  }catch(error){
-    this.MessageService.showError('Action failed with error' + error);
-  }
-}
-
-onSubmit(){
-  try{
-    console.log('Mode ' + this.mode);
-    console.log('form submitted');
-    console.log(this.demoForm.value);
-
-    this.submitted = true;
-    if(this.mode == 'add'){
-  //     this.demoService.serviceCall(this.demoForm.value).subscribe((response)=>{
-
-  //       if(this.dataSource && this.dataSource.data && this.dataSource.data.length>0){
-  //            this.dataSource = new MatTableDataSource([response, ...this.dataSource.data])
-  //       } else{
-  //         this.dataSource = new MatTableDataSource([response]); //input data goes to the top of the display
-  //       }
-
-  //       this.MessageService.showSuccess('Data saved successfully!');
-  //  });
-  this.demoService.serviceCall(this.demoForm.value).subscribe({
-    next: (response: any) => {
-      if(this.dataSource && this.dataSource.data && this.dataSource.data.length>0){
-                   this.dataSource = new MatTableDataSource([response, ...this.dataSource.data])
-              } else{
-                this.dataSource = new MatTableDataSource([response]); //input data goes to the top of the display
-              }
-
-              this.MessageService.showSuccess('Data saved successfully!');
-         },
-         error: (error)=> {
-             this.MessageService.showError('Action failed with erro' + error);
-         }
-});
-
-    } else if (this.mode === 'edit'){
-      //  this.demoService.editData(this.selectedData?.id, this.demoForm.value).subscribe((response) =>{
-      //    let elementIndex = this.dataSource.data.findIndex((element) => element.id === this.selectedData?.id);
-      //    this.dataSource.data[elementIndex] = response;
-      //    this.dataSource = new MatTableDataSource(this.dataSource.data);
-      //    this.MessageService.showSuccess('Data  edited successfully!');
-
-      //  });
-      console.log('Mode ' + this.mode);
-
-      this.demoService.editData(this.selectedData?.id, this.demoForm.value).subscribe({
-          next: (response: any)=>{
-            console.log("put data Server Response", response);
-         let elementIndex = this.dataSource.data.findIndex((element) => element.id === this.selectedData?.id);
-         this.dataSource.data[elementIndex] = response;
-         this.dataSource = new MatTableDataSource(this.dataSource.data);
-         this.MessageService.showSuccess('Data  edited successfully!');
-          },
-          error: (error)=> {
-            this.MessageService.showError('Action failed with erro' + error);
+          }
+          this.dataSource = new MatTableDataSource(dataList);
+          console.log('get data response', dataList);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        }, error: (error) => {
+          this.MessageService.showError('Action failed with error' + error);
         }
       });
+    } catch (error) {
+      this.MessageService.showError('Action failed with error' + error);
     }
+  }
+
+  onSubmit() {
+    try {
+      console.log('Mode ' + this.mode);
+      console.log('form submitted');
+      // console.log(this.demoForm.value);
+
+      this.submitted = true;
+      if (this.mode == 'add') {
+        const selectedDate = new Date(this.demoForm.value.birthDate);
+        selectedDate.setUTCHours(0, 0, 0, 0);
+        this.demoForm.patchValue({ birthDate: selectedDate });
+        console.log(JSON.stringify(this.demoForm.value) + " after patching date");
+        //     this.demoService.serviceCall(this.demoForm.value).subscribe((response)=>{
+
+        //       if(this.dataSource && this.dataSource.data && this.dataSource.data.length>0){
+        //            this.dataSource = new MatTableDataSource([response, ...this.dataSource.data])
+        //       } else{
+        //         this.dataSource = new MatTableDataSource([response]); //input data goes to the top of the display
+        //       }
+
+        //       this.MessageService.showSuccess('Data saved successfully!');
+        //  });
+        this.demoService.serviceCall(this.demoForm.value).subscribe({
+          next: (response: any) => {
+            if (this.dataSource && this.dataSource.data && this.dataSource.data.length > 0) {
+              this.dataSource = new MatTableDataSource([response, ...this.dataSource.data])
+            } else {
+              this.dataSource = new MatTableDataSource([response]); //input data goes to the top of the display
+            }
+
+            this.MessageService.showSuccess('Data saved successfully!');
+          },
+          error: (error) => {
+            this.MessageService.showError('Action failed with erro' + error);
+          }
+        });
+
+      } else if (this.mode === 'edit') {
+        //  this.demoService.editData(this.selectedData?.id, this.demoForm.value).subscribe((response) =>{
+        //    let elementIndex = this.dataSource.data.findIndex((element) => element.id === this.selectedData?.id);
+        //    this.dataSource.data[elementIndex] = response;
+        //    this.dataSource = new MatTableDataSource(this.dataSource.data);
+        //    this.MessageService.showSuccess('Data  edited successfully!');
+
+        //  });
+        console.log('Mode ' + this.mode);
+
+        this.demoService.editData(this.selectedData?.id, this.demoForm.value).subscribe({
+          next: (response: any) => {
+            console.log("put data Server Response", response);
+            let elementIndex = this.dataSource.data.findIndex((element) => element.id === this.selectedData?.id);
+            this.dataSource.data[elementIndex] = response;
+            this.dataSource = new MatTableDataSource(this.dataSource.data);
+            this.MessageService.showSuccess('Data  edited successfully!');
+          },
+          error: (error) => {
+            this.MessageService.showError('Action failed with erro' + error);
+          }
+        });
+      }
       this.mode = 'add';
       this.demoForm.disable(); // automatically disable the form after submitting form data
       this.isButtonDisabled = true;
-  }catch(error){
+    } catch (error) {
 
-        this.MessageService.showError('Action failed with error' + error);
+      this.MessageService.showError('Action failed with error' + error);
+    }
   }
-}
-public resetData(formDirective:FormGroupDirective): void {
-  this.demoForm.reset();
-  formDirective.resetForm()
-  this.demoForm.setErrors = null;
-  this.demoForm.updateValueAndValidity();
-  this.saveButtonLabel = 'save';
-  this.demoForm.enable();
-  this.isButtonDisabled = false;
-  this.submitted = false;
-}
-
-public editData(data:any): void {
-  this.demoForm.patchValue(data);
-  this.saveButtonLabel = "Edit";
-  this.mode = 'edit';
-  this.selectedData = data;
-}
-
-public deleteData(data:any): void {
-
-// data delete implementation
-
-const id = data.id;
-
-try{
-  // this.demoService.deleteData(id).subscribe((response) => {
-  //   const index = this.dataSource.data.findIndex((element) => element.id == id);
-  //   if(index !== -1){
-  //      this.dataSource.data.splice( index,1 );
-  //   }
-  //   this.dataSource = new MatTableDataSource(this.dataSource.data);
-  //   this.MessageService.showSuccess('Data deleted successfully!');
-  //   });
-
-  this.demoService.deleteData(id).subscribe({
-    next: (response: any)=>{
-      const index = this.dataSource.data.findIndex((element) => element.id == id);
-      if(index !== -1){
-         this.dataSource.data.splice( index,1 );
-      }
-      this.dataSource = new MatTableDataSource(this.dataSource.data);
-      this.MessageService.showSuccess('Data deleted successfully!');
-    },   error: (error)=> {
-      this.MessageService.showError('Action failed with erro' + error);
+  public resetData(formDirective: FormGroupDirective): void {
+    this.demoForm.reset();
+    formDirective.resetForm()
+    this.demoForm.setErrors = null;
+    this.demoForm.updateValueAndValidity();
+    this.saveButtonLabel = 'save';
+    this.demoForm.enable();
+    this.isButtonDisabled = false;
+    this.submitted = false;
   }
-    });
+
+  public editData(data: any): void {
+    const selectedDate = new Date(data.birthDate);
+    this.demoForm.patchValue(data);
+    this.demoForm.patchValue({birthDate: selectedDate});
+    console.log('Edit data', data);
+    this.saveButtonLabel = "Edit";
+    this.mode = 'edit';
+    this.selectedData = data;
+  }
+
+  public deleteData(data: any): void {
+
+    // data delete implementation
+
+    const id = data.id;
+
+    try {
+      // this.demoService.deleteData(id).subscribe((response) => {
+      //   const index = this.dataSource.data.findIndex((element) => element.id == id);
+      //   if(index !== -1){
+      //      this.dataSource.data.splice( index,1 );
+      //   }
+      //   this.dataSource = new MatTableDataSource(this.dataSource.data);
+      //   this.MessageService.showSuccess('Data deleted successfully!');
+      //   });
+
+      this.demoService.deleteData(id).subscribe({
+        next: (response: any) => {
+          const index = this.dataSource.data.findIndex((element) => element.id == id);
+          if (index !== -1) {
+            this.dataSource.data.splice(index, 1);
+          }
+          this.dataSource = new MatTableDataSource(this.dataSource.data);
+          this.MessageService.showSuccess('Data deleted successfully!');
+        }, error: (error) => {
+          this.MessageService.showError('Action failed with erro' + error);
+        }
+      });
 
 
 
 
-}catch(error){
+    } catch (error) {
 
-  this.MessageService.showError('Action failed with error' + error);}
-}
+      this.MessageService.showError('Action failed with error' + error);
+    }
+  }
 
-applyFilter(event: Event) {
-  const filterValue = (event.target as HTMLInputElement).value;
-  this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-  if (this.dataSource.paginator) {
-     this.dataSource.paginator.firstPage();
-  }}
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 
   public refreshData(): void {
-     this.populateData();
-     }
+    this.populateData();
+  }
+
+//birthdate change age calculation
+  age: number = 0;
+
+onBirthDateChange(event: any): void {
+  const selectedDate: Date = event.value;
+  this.age = this.calculateAge(selectedDate);
+
+  this.demoForm.get('age')?.setValue(this.age);
+  this.demoForm.get('age')?.markAsTouched();
+  this.demoForm.get('age')?.updateValueAndValidity();
+}
+
+calculateAge(birthDate: Date): number {
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  return age;
+}
+
 }

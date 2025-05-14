@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="form-section">
     <!-- demo-Form -->
@@ -9,7 +8,8 @@
         <mat-label>First Name</mat-label>
         <input matInput placeholder="First Name" formControlName="firstName">
         <!-- Validation Message: Required -->
-        <span class="text-danger" *ngIf="(demoForm.get('firstName').touched || submitted) && demoForm.get('firstName').errors?.['required']">
+        <span class="text-danger"
+          *ngIf="(demoForm.get('firstName').touched || submitted) && demoForm.get('firstName').errors?.['required']">
           First name is required*
         </span>
       </mat-form-field>
@@ -20,16 +20,27 @@
         <input matInput placeholder="Last Name" formControlName="lastName">
 
         <!-- Validation Messages: Required, Min Length, Max Length -->
-        <span class="text-danger" *ngIf="(demoForm.get('lastName').touched || submitted) && demoForm.get('lastName').errors?.['required']">
+        <span class="text-danger"
+          *ngIf="(demoForm.get('lastName').touched || submitted) && demoForm.get('lastName').errors?.['required']">
           Last name is required*
         </span>
-        <span class="text-danger" *ngIf="(demoForm.get('lastName').touched || submitted) && demoForm.get('lastName').errors?.['minlength']">
+        <span class="text-danger"
+          *ngIf="(demoForm.get('lastName').touched || submitted) && demoForm.get('lastName').errors?.['minlength']">
           Min length for last Name is three characters*
         </span>
-        <span class="text-danger" *ngIf="(demoForm.get('lastName').touched || submitted) && demoForm.get('lastName').errors?.['maxlength']">
+        <span class="text-danger"
+          *ngIf="(demoForm.get('lastName').touched || submitted) && demoForm.get('lastName').errors?.['maxlength']">
           Max length for last Name is 8 characters*
         </span>
       </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Birth Date</mat-label>
+        <input matInput [max]="today" [matDatepicker]="picker" formControlName="birthDate" placeholder="Birth Date" (dateChange)="onBirthDateChange($event)">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
 
       <!-- Age Field -->
       <mat-form-field class="full-width">
@@ -37,10 +48,12 @@
         <input matInput placeholder="Age" formControlName="age">
 
         <!-- Validation Messages: Age Constraints -->
-        <span class="text-danger" *ngIf="(demoForm.get('age').touched || submitted) && demoForm.get('age').errors?.['min']">
+        <span class="text-danger"
+          *ngIf="(demoForm.get('age').touched || submitted) && demoForm.get('age').errors?.['min']">
           Age must be greater than 14*
         </span>
-        <span class="text-danger" *ngIf="(demoForm.get('age').touched || submitted) && demoForm.get('age').errors?.['max']">
+        <span class="text-danger"
+          *ngIf="(demoForm.get('age').touched || submitted) && demoForm.get('age').errors?.['max']">
           Age must be less than 120*
         </span>
       </mat-form-field>
@@ -50,7 +63,8 @@
         <mat-label>Email</mat-label>
         <input matInput placeholder="Email" formControlName="email">
         <!-- Validation Message: Email Format -->
-        <span class="text-danger" *ngIf="(demoForm.get('email').touched || submitted) && demoForm.get('email').errors?.['pattern']">
+        <span class="text-danger"
+          *ngIf="(demoForm.get('email').touched || submitted) && demoForm.get('email').errors?.['pattern']">
           Please insert a valid email*
         </span>
       </mat-form-field>
@@ -106,10 +120,10 @@
         <td mat-cell *matCellDef="let element"> {{element.age}} </td>
       </ng-container>
 
-      <!-- Email Column -->
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> Email</th>
-        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      <!-- Birthdate Column -->
+      <ng-container matColumnDef="birthDate">
+        <th mat-header-cell *matHeaderCellDef> Birth Date</th>
+        <td mat-cell *matCellDef="let element">{{ element.birthDate | date:'yyyy-MM-dd' }} </td>
       </ng-container>
 
       <!-- Actions Column (Edit/Delete) -->
