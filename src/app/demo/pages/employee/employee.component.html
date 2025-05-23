@@ -1,231 +1,231 @@
-<div class="container">
-  <div class="form-section" >
-<form action="example-form" [formGroup]="employeeForm" (ngSubmit)="onSubmit()" #formDirective="ngForm">
+  <div class="container">
+    <div class="form-section" >
+  <form action="example-form" [formGroup]="employeeForm" (ngSubmit)="onSubmit()" #formDirective="ngForm">
 
-      <!-- Image Upload -->
-<mat-form-field class="full-width" appearance="fill">
-  <mat-label>Image Upload</mat-label>
-  <input matInput placeholder="Choose Image" [value]="selectedFileName" readonly>
-  <input type="file" (change)="onFileChange($event)" formControlName="imageUpload" hidden #fileInput>
-  <button mat-button matSuffix type="button" (click)="fileInput.click()">Browse</button>
-</mat-form-field>
+        <!-- Image Upload -->
+  <mat-form-field class="full-width" appearance="fill">
+    <mat-label>Image Upload</mat-label>
+    <input matInput placeholder="Choose Image" [value]="selectedFileName" readonly>
+    <input type="file" (change)="onFileChange($event)" formControlName="imageUpload" hidden #fileInput>
+    <button mat-button matSuffix type="button" (click)="fileInput.click()">Browse</button>
+  </mat-form-field>
 
 
-         <!-- Emp_no -->
-         <mat-form-field class="full-width">
-          <mat-label>Employee Number</mat-label>
-          <input matInput placeholder="Employee Number" formControlName="employeeNumber" >
-          <span class="text-danger" *ngIf="(employeeForm.get('employeeNumber').touched || submitted) && employeeForm.get('employeeNumber').errors?.['required']">
-            Employee number is required*
-          </span>  
-        </mat-form-field>
+          <!-- Emp_no -->
+          <mat-form-field class="full-width">
+            <mat-label>Employee Number</mat-label>
+            <input matInput placeholder="Employee Number" formControlName="employeeNumber" >
+            <span class="text-danger" *ngIf="(employeeForm.get('employeeNumber').touched || submitted) && employeeForm.get('employeeNumber').errors?.['required']">
+              Employee number is required*
+            </span>  
+          </mat-form-field>
 
-        <!-- Full Name -->
+          <!-- Full Name -->
+          <mat-form-field class="full-width">
+            <mat-label>Full Name</mat-label>
+            <input matInput placeholder="Full Name"formControlName="fullName">
+            <span class="text-danger" *ngIf="(employeeForm.get('fullName').touched || submitted) && employeeForm.get('fullName').errors?.['required']">
+              Full Name is required*</span>
+          </mat-form-field>
+
+        <!-- First Name -->
         <mat-form-field class="full-width">
-          <mat-label>Full Name</mat-label>
-          <input matInput placeholder="Full Name"formControlName="fullName">
-          <span class="text-danger" *ngIf="(employeeForm.get('fullName').touched || submitted) && employeeForm.get('fullName').errors?.['required']">
-            Full Name is required*</span>
+          <mat-label>First Name</mat-label>
+          <input matInput placeholder="First Name" formControlName="firstName" >
+          <span class="text-danger" *ngIf="(employeeForm.get('firstName').touched || submitted) && employeeForm.get('firstName').errors?.['required']">
+            First name is required*
+          </span>
         </mat-form-field>
 
-      <!-- First Name -->
+
+        <!-- Last Name -->
+        <mat-form-field class="full-width">
+          <mat-label>Last Name</mat-label>
+          <input matInput placeholder="Last Name" formControlName="lastName">
+          <span class="text-danger" *ngIf="(employeeForm.get('lastName').touched || submitted) && employeeForm.get('lastName').errors?.['required']">
+            Last name is required*
+          </span>
+        </mat-form-field>
+
+
+                <!-- NIC -->
+                <mat-form-field class="full-width">
+                  <mat-label>NIC</mat-label>
+                  <input matInput placeholder="NiC" formControlName="nic">
+                  <span class="text-danger" *ngIf="(employeeForm.get('nic').touched || submitted) && employeeForm.get('nic').errors?.['required']">
+                    NIC is required*
+                  </span>
+                  <span class="text-danger" *ngIf="(employeeForm.get('nic').touched || submitted) && employeeForm.get('nic').errors?.['pattern']">
+                    NIC must be a valid format (e.g., 123456789V or 200012345678)*
+                  </span> 
+                </mat-form-field>
+
+                    <!-- Role Dropdown -->
+                <mat-form-field class="full-width">
+                  <mat-label>Role</mat-label>
+                    <mat-select formControlName="role">
+                    <mat-option value="role1">A</mat-option>
+                      <mat-option value="role2">B</mat-option>
+                </mat-select>
+                <span class="text-danger" *ngIf="(employeeForm.get('role').touched || submitted) && employeeForm.get('role').errors?.['required']">
+                  Role is required*
+                </span>
+                </mat-form-field>
+
+                <!-- Date of Birth -->
+
+                <mat-form-field class="full-width" appearance="fill">
+                  <mat-label>Date of Birth</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <span class="text-danger" *ngIf="(employeeForm.get('dateOfBirth')?.touched || submitted) && employeeForm.get('dateOfBirth')?.errors?.['required']">
+                    Date of birth is required*
+                  </span>
+                </mat-form-field>
+
+
+        <!-- Age -->
+        <mat-form-field class="full-width">
+          <mat-label>Age</mat-label>
+          <input matInput placeholder="Age"  type="number" formControlName="age">
+          <span class="text-danger" *ngIf="(employeeForm.get('age').touched || submitted) && employeeForm.get('age').errors?.['required']">
+            Age is required*
+          </span>
+    </mat-form-field>
+
+
+      <!-- Gender Dropdown -->
       <mat-form-field class="full-width">
-        <mat-label>First Name</mat-label>
-        <input matInput placeholder="First Name" formControlName="firstName" >
-        <span class="text-danger" *ngIf="(employeeForm.get('firstName').touched || submitted) && employeeForm.get('firstName').errors?.['required']">
-          First name is required*
-        </span>
+          <mat-label>Gender</mat-label>
+      <mat-select formControlName="gender">
+      <mat-option value="male">Male</mat-option>
+      <mat-option value="female">Female</mat-option>
+      </mat-select>
+
+      <span class="text-danger" *ngIf="(employeeForm.get('gender').touched || submitted) && employeeForm.get('gender').errors?.['required']">
+        Gender is required*
+      </span>
       </mat-form-field>
 
-
-      <!-- Last Name -->
-      <mat-form-field class="full-width">
-        <mat-label>Last Name</mat-label>
-        <input matInput placeholder="Last Name" formControlName="lastName">
-        <span class="text-danger" *ngIf="(employeeForm.get('lastName').touched || submitted) && employeeForm.get('lastName').errors?.['required']">
-          Last name is required*
-        </span>
-      </mat-form-field>
+  <!-- Address-->
+  <mat-form-field class="full-width">
+    <mat-label>Address</mat-label>
+    <input matInput placeholder="Address" formControlName="address" >
+  </mat-form-field>
 
 
-              <!-- NIC -->
-              <mat-form-field class="full-width">
-                <mat-label>NIC</mat-label>
-                <input matInput placeholder="NiC" formControlName="nic">
-                <span class="text-danger" *ngIf="(employeeForm.get('nic').touched || submitted) && employeeForm.get('nic').errors?.['required']">
-                  NIC is required*
-                </span>
-                <span class="text-danger" *ngIf="(employeeForm.get('nic').touched || submitted) && employeeForm.get('nic').errors?.['pattern']">
-                  NIC must be a valid format (e.g., 123456789V or 200012345678)*
-                </span> 
-              </mat-form-field>
-
-                   <!-- Role Dropdown -->
-               <mat-form-field class="full-width">
-                <mat-label>Role</mat-label>
-                   <mat-select formControlName="role">
-                  <mat-option value="role1">A</mat-option>
-                     <mat-option value="role2">B</mat-option>
-               </mat-select>
-               <span class="text-danger" *ngIf="(employeeForm.get('role').touched || submitted) && employeeForm.get('role').errors?.['required']">
-                Role is required*
-              </span>
-              </mat-form-field>
-
-              <!-- Date of Birth -->
-
-              <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Date of Birth</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                <span class="text-danger" *ngIf="(employeeForm.get('dateOfBirth')?.touched || submitted) && employeeForm.get('dateOfBirth')?.errors?.['required']">
-                  Date of birth is required*
-                </span>
-              </mat-form-field>
-
-
-      <!-- Age -->
-      <mat-form-field class="full-width">
-        <mat-label>Age</mat-label>
-        <input matInput placeholder="Age"  type="number" formControlName="age">
-        <span class="text-danger" *ngIf="(employeeForm.get('age').touched || submitted) && employeeForm.get('age').errors?.['required']">
-          Age is required*
-        </span>
-   </mat-form-field>
-
-
-     <!-- Gender Dropdown -->
-     <mat-form-field class="full-width">
-        <mat-label>Gender</mat-label>
-     <mat-select formControlName="gender">
-     <mat-option value="male">Male</mat-option>
-     <mat-option value="female">Female</mat-option>
-    </mat-select>
-
-    <span class="text-danger" *ngIf="(employeeForm.get('gender').touched || submitted) && employeeForm.get('gender').errors?.['required']">
-      Gender is required*
+      <!-- Phone Number  -->
+  <mat-form-field class="full-width">
+    <mat-label>Phone Number</mat-label>
+    <input matInput placeholder="Phone Number" formControlName="phoneNumber" >
+    <span class="text-danger" *ngIf="(employeeForm.get('phoneNumber').touched || submitted) && employeeForm.get('phoneNumber').errors?.['required']">
+      Enter a valid phone number*
     </span>
-    </mat-form-field>
-
-<!-- Address-->
-<mat-form-field class="full-width">
-  <mat-label>Address</mat-label>
-  <input matInput placeholder="Address" formControlName="address" >
-</mat-form-field>
+  </mat-form-field>
 
 
-    <!-- Phone Number  -->
-<mat-form-field class="full-width">
-  <mat-label>Phone Number</mat-label>
-  <input matInput placeholder="Phone Number" formControlName="phoneNumber" >
-  <span class="text-danger" *ngIf="(employeeForm.get('phoneNumber').touched || submitted) && employeeForm.get('phoneNumber').errors?.['required']">
-    Enter a valid phone number*
-  </span>
-</mat-form-field>
+        <!-- Email -->
+        <mat-form-field class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email">
+          <span class="text-danger" *ngIf="(employeeForm.get('email').touched || submitted) && employeeForm.get('email').errors?.['pattern']">
+            Please insert a valid email*
+          </span>
+        </mat-form-field>
 
+      <!-- Pharmacist regno -->
 
-      <!-- Email -->
-      <mat-form-field class="full-width">
-        <mat-label>Email</mat-label>
-        <input matInput placeholder="Email" formControlName="email">
-        <span class="text-danger" *ngIf="(employeeForm.get('email').touched || submitted) && employeeForm.get('email').errors?.['pattern']">
-          Please insert a valid email*
-        </span>
-      </mat-form-field>
+      <!-- Emergency Contact Number  -->
+  <mat-form-field class="full-width">
+    <mat-label>Phone Number</mat-label>
+    <input matInput placeholder="Emergency Phone Number" formControlName="emergencyPhoneNumber">
+    <span class="text-danger" *ngIf="(employeeForm.get('email').touched || submitted) && employeeForm.get('email').errors?.['pattern']">
+      Please insert a valid email*
+    </span>
+  </mat-form-field>
 
-     <!-- Pharmacist regno -->
-
-     <!-- Emergency Contact Number  -->
-<mat-form-field class="full-width">
-  <mat-label>Phone Number</mat-label>
-  <input matInput placeholder="Emergency Phone Number" formControlName="emergencyPhoneNumber">
-  <span class="text-danger" *ngIf="(employeeForm.get('email').touched || submitted) && employeeForm.get('email').errors?.['pattern']">
-    Please insert a valid email*
-  </span>
-</mat-form-field>
-
-      <!-- Register Button -->
-      <button type="submit" mat-raised-button color="primary" class="form-button" > {{saveButtonLabel}}
-        Register
-      </button>
-      <!-- Reset Button -->
-      <button type="button" mat-raised-button color="secondary" class="form-button" (click)="resetData(formDirective)">
-        Reset
-      </button>
-</form>
-</div>
- <!--    Table section    -->
- <div class="table-section">
-  <div class="refresh-filter-section">
-    <div class="refresh-button">
-      <button mat-icon-button color="primary" (click)="refreshData()">
-        <mat-icon>refresh</mat-icon>
-      </button>
-    </div>
-    <br>
-
-    <mat-form-field class="filter">
-      <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
-    </mat-form-field>
+        <!-- Register Button -->
+        <button type="submit" mat-raised-button color="primary" class="form-button" > {{saveButtonLabel}}
+          Register
+        </button>
+        <!-- Reset Button -->
+        <button type="button" mat-raised-button color="secondary" class="form-button" (click)="resetData(formDirective)">
+          Reset
+        </button>
+  </form>
   </div>
-
-
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
-
-    <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef> First Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef> Last Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="age">
-      <th mat-header-cell *matHeaderCellDef> Age </th>
-      <td mat-cell *matCellDef="let element"> {{element.age}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="gender">
-      <th mat-header-cell *matHeaderCellDef> Gender </th>
-      <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="phoneNumber">
-      <th mat-header-cell *matHeaderCellDef> Phone Number </th>
-      <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="address">
-      <th mat-header-cell *matHeaderCellDef> Address </th>
-      <td mat-cell *matCellDef="let element"> {{element.address}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="warn" (click)="editData(element)" matTooltip="Edit">
-          <mat-icon>edit</mat-icon>
+  <!--    Table section    -->
+  <div class="table-section">
+    <div class="refresh-filter-section">
+      <div class="refresh-button">
+        <button mat-icon-button color="primary" (click)="refreshData()">
+          <mat-icon>refresh</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="deleteData(element)" matTooltip="Delete">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+      </div>
+      <br>
 
- <!-- Table Rows -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <mat-form-field class="filter">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
+      </mat-form-field>
+    </div>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
-</div>
-</div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Last Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef> Age </th>
+        <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef> Gender </th>
+        <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phoneNumber">
+        <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+        <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef> Address </th>
+        <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="warn" (click)="editData(element)" matTooltip="Edit">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteData(element)" matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+  <!-- Table Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+  </div>
