@@ -24,7 +24,7 @@ export interface PeriodicElement {
 })
 export class FormDemoComponent implements OnInit {
       demoForm: FormGroup;
-      displayedColumns: string[] = ['firstName', 'lastName', 'age', 'email', 'actions'];
+      displayedColumns: string[] = ['firstName', 'lastName', 'age', 'birthdate', 'actions'];
       dataSource = new MatTableDataSource<any>;
       @ViewChild(MatPaginator) paginator: MatPaginator;
       @ViewChild(MatSort) sort: MatSort;
@@ -34,7 +34,7 @@ export class FormDemoComponent implements OnInit {
       selectedData;
       isButtonDisabled: boolean = false;
       submitted: any;
-
+      today: Date = new Date();
 
 
  constructor(
