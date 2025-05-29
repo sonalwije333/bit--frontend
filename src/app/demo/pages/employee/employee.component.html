@@ -74,25 +74,29 @@
 
               <!-- Date of Birth -->
 
-              <mat-form-field class="full-width" appearance="fill">
-                <mat-label>Date of Birth</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
-                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                <span class="text-danger" *ngIf="(employeeForm.get('dateOfBirth')?.touched || submitted) && employeeForm.get('dateOfBirth')?.errors?.['required']">
-                  Date of birth is required*
-                </span>
-              </mat-form-field>
+          <mat-form-field>
+                  <mat-label>Birth Date</mat-label>
+                  <input matInput [max]="today" [matDatepicker]="picker" formControlName="birthDate" placeholder="Birth Date" (dateChange)="onBirthDateChange($event)">
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
 
 
-      <!-- Age -->
-      <mat-form-field class="full-width">
-        <mat-label>Age</mat-label>
-        <input matInput placeholder="Age"  type="number" formControlName="age">
-        <span class="text-danger" *ngIf="(employeeForm.get('age').touched || submitted) && employeeForm.get('age').errors?.['required']">
-          Age is required*
-        </span>
-   </mat-form-field>
+    <!-- Age Field -->
+          <mat-form-field class="full-width">
+            <mat-label>Age</mat-label>
+            <input matInput placeholder="Age" formControlName="age">
+
+            <!-- Validation Messages: Age Constraints -->
+            <span class="text-danger"
+              *ngIf="(employeeForm.get('age').touched || submitted) && employeeForm.get('age').errors?.['min']">
+              Age must be greater than 14*
+            </span>
+            <span class="text-danger"
+              *ngIf="(employeeForm.get('age').touched || submitted) && employeeForm.get('age').errors?.['max']">
+              Age must be less than 120*
+            </span>   
+          </mat-form-field>
 
 
      <!-- Gender Dropdown -->

@@ -25,6 +25,8 @@ export class EmployeeComponent implements OnInit{
   selectedData: any;
   isButtonDisabled: boolean = false;
   submitted: boolean;
+   today: Date = new Date();
+
   customerService: any;
 customerForm: FormGroup<any>;
   constructor(
@@ -41,7 +43,7 @@ customerForm: FormGroup<any>;
       lastName: new FormControl('' ,  Validators.required),
       nic: new FormControl('' , [Validators.required , Validators.pattern('^([0-9]{9}[vVxX]|[0-9]{12})$') ]),
       role: new FormControl('' , Validators.required),
-      dateOfBirth: new FormControl('' , Validators.required),
+      birthDate: new FormControl('' , Validators.required),
       age: new FormControl('', [Validators.required,Validators.min(14),Validators.max(120)]),
       gender: new FormControl('', [Validators.required]),
       address: new FormControl('', [Validators.required,Validators.min(14),Validators.max(120)]),
@@ -206,5 +208,24 @@ public deleteData(data:any): void {
            imageUpload: file
          });
        }
-     }}
+     }
+    //birthdate changes age calculation
+  age: number = 0;
+
+onBirthDateChange(event: any): void {
+  const selectedDate: Date = event.value;
+  this.age = this.calculateAge(selectedDate);
+  this.employeeForm.get('age')?.setValue(this.age);
+  this.employeeForm.get('age')?.markAsTouched();
+  this.employeeForm.get('age')?.updateValueAndValidity();
+}
+calculateAge(birthDate: Date): number {
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+ } }
 
