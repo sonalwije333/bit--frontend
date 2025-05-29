@@ -135,6 +135,27 @@ export const NavigationItems: NavigationItem[] = [
       }
     ]
   },
+
+  
+  {
+    id: 'inventory',  //created inventory
+    title: 'Inventory',
+    type: 'group',
+    icon: 'icon-navigation',
+    auth: authenticationEnum.Home,
+    children: [
+      {
+        id: 'inventoryDet',
+        title: 'Inventory',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/pages/inventory',
+        icon: 'dashboard',
+        auth: authenticationEnum.Home,
+        breadcrumbs: false
+      }
+    ]
+  },
   {
     id: 'authentication',
     title: 'Authentication',

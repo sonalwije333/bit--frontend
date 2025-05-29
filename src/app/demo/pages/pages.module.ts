@@ -9,11 +9,12 @@ import { MaterialModule } from 'src/app/material.module';
 import { FormDemoComponent } from './form-demo/form-demo.component';
 import { CustomerComponent } from './customer/customer.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 // icons
 
 @NgModule({
-  declarations: [TestComponent,FormDemoComponent,CustomerComponent,EmployeeComponent],
+  declarations: [TestComponent,FormDemoComponent,CustomerComponent,EmployeeComponent,InventoryComponent],
   imports: [CommonModule, FormsModule, NgApexchartsModule, RouterModule.forChild(PagesRoutes), MaterialModule,ReactiveFormsModule],
   exports: []
 })
