@@ -4,6 +4,7 @@ import { FormDemoComponent } from './form-demo/form-demo.component';
 import { CustomerComponent } from './customer/customer.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { ItemRegistrationComponent } from './item-registration/item-registration.component';
 
 export const PagesRoutes: Routes = [
   {
@@ -30,5 +31,11 @@ export const PagesRoutes: Routes = [
   {
     path: 'inventory',
     component: InventoryComponent
+  }
+  ,
+  {
+    path: 'item-registration',
+    component: ItemRegistrationComponent
+    
   }
 ];
