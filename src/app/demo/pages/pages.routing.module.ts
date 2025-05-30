@@ -3,6 +3,7 @@ import { TestComponent } from './test/test.component';
 import { FormDemoComponent } from './form-demo/form-demo.component';
 import { CustomerComponent } from './customer/customer.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 export const PagesRoutes: Routes = [
   {
@@ -25,5 +26,9 @@ export const PagesRoutes: Routes = [
   {
     path: 'employee',
     component: EmployeeComponent
+  },
+  {
+    path: 'inventory',
+    component: InventoryComponent
   }
 ];
