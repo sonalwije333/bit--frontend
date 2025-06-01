@@ -16,7 +16,7 @@ export class ItemRegistrationService {
   serviceCall(formData: FormData) {
     console.log('In the service');
 
-    const requestUrl = environment.baseUrl + '/pro-save';
+    const requestUrl = environment.baseUrl + '/item-registry';
     let headers = {};
 
     if (this.httpService.getAuthToken() !== null) {
