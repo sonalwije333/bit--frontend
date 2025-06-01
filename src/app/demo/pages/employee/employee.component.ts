@@ -50,8 +50,6 @@ customerForm: FormGroup<any>;
       phoneNumber: new FormControl('', [ Validators.required,Validators.pattern('^[0-9]{10}$')  ]),
       email: new FormControl('' , [Validators.required,Validators.email]),
       emergencyPhoneNumber: new FormControl('' , Validators.required),
-
-
     });
   }
 

@@ -33,6 +33,7 @@ export class CustomerComponent implements OnInit{
 
   saveButtonLabel = 'Save';
    mode = 'add';
+   
   selectedData: any;
   isButtonDisabled: boolean = false;
   submitted: boolean;
