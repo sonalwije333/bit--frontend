@@ -116,6 +116,8 @@ export class NavContentComponent implements OnInit {
     }
   }
 
+  
+
   public setEntitlements(navigationArray: NavigationItem[], isAdmin: boolean, privilegeArray?: number[]): void {
     navigationArray.forEach((element) => {
       if (isAdmin) {

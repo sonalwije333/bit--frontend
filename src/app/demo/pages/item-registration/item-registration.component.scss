@@ -1,0 +1,226 @@
+// Container and Layout
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background: #f8f9fa;
+}
+
+// Form Section
+.form-section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 2rem;
+
+  .form-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .file-upload {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    
+    input[type="file"] {
+      flex: 1;
+      padding: 0.5rem;
+      border: 1px dashed #cbd5e0;
+      border-radius: 4px;
+      
+      &:hover {
+        border-color: #3f51b5;
+      }
+    }
+  }
+
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+
+    button {
+      min-width: 120px;
+      padding: 0.5rem 1.5rem;
+    }
+  }
+}
+
+.filter-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+
+  .filter-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; // Spread out the button and search
+    gap: 1.5rem;
+
+    .refresh-btn {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      margin-right: 0.5rem;
+    }
+
+    .search-field {
+      flex: 1;
+      max-width: 400px;
+      margin-bottom: 0;
+      min-width: 200px;
+
+      ::ng-deep .mat-form-field-wrapper {
+        margin-bottom: -1.25em;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .filter-section {
+    padding: 0.75rem;
+
+    .filter-controls {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.75rem;
+
+      .refresh-btn {
+        margin-right: 0;
+        justify-content: flex-start;
+      }
+
+      .search-field {
+        max-width: 100%;
+        min-width: 0;
+      }
+    }
+  }
+}
+
+// Cards Grid
+.item-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.item-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background: white;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+
+    .image-overlay {
+      opacity: 1;
+    }
+  }
+
+  .card-image-container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+
+    .card-item-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  }
+
+  mat-card-header {
+    padding: 1rem;
+
+    mat-card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin: 0;
+    }
+
+    mat-card-subtitle {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+  }
+
+  mat-card-actions {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-top: 1px solid #edf2f7;
+gap: 12px;
+    .spacer {
+      flex: 1;
+    }
+
+    button[mat-button] {
+      border-radius: 6px;
+      min-width: 80px;
+      font-weight: 500;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .form-section {
+    padding: 1rem;
+  }
+
+  .item-container {
+    grid-template-columns: 1fr;
+  }
+
+  .item-card {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>{{ data.itemName }}</h2>
+<mat-dialog-content>
+  
+  <img *ngIf="data.imageBase64" [src]="data.imageBase64" alt="Item Image" width="100%" class="item-img"/>
+  <br>
+  <br>
+  <p><strong>Generic Name:</strong> {{ data.genericName }}</p>
+  <p><strong>Expiry Date:</strong> {{ data.expiryDate | date: 'yyyy/MM/dd' }}</p>
+  <p><strong>Formulation:</strong> {{ data.formulation }}</p>
+  <p><strong>Type:</strong> {{ data.type }}</p>
+  <p><strong>Unit of Measure:</strong> {{ data.unitOfMeasure }}</p>
+  <p><strong>Pack Size:</strong>{{data.packSize}}</p>
+  <p><strong>Description:</strong> {{ data.description }}</p>
+
+</mat-dialog-content>
+
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
