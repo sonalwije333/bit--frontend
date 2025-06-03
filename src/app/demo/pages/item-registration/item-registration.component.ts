@@ -186,7 +186,7 @@ export class ItemRegistrationComponent implements OnInit {
     this.populateData();
   }
 
-  
+
 
 
   }

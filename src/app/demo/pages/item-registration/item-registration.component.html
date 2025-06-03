@@ -29,7 +29,7 @@
       <!-- Consume Type -->
       <mat-form-field class="full-width">
         <mat-label>Consume Type</mat-label>
-        <mat-select formControlName="consumetype">
+        <mat-select formControlName="consumeType">
           <mat-option value="internal">Internal</mat-option>
           <mat-option value="external">External</mat-option>
         </mat-select>
@@ -184,7 +184,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
     </table>
-    
+
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of items"></mat-paginator>
   </div>
 </div>
