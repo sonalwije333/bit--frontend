@@ -16,7 +16,7 @@ export class ItemRegistrationService {
   serviceCall(formData: FormData) {
     console.log('In the service');
 
-    const requestUrl = environment.baseUrl + '/item-registry';
+    const requestUrl = environment.baseUrl + '/item';
     let headers = {};
 
     if (this.httpService.getAuthToken() !== null) {
@@ -29,7 +29,7 @@ export class ItemRegistrationService {
   }
 
   getData() {
-    const requestUrl = environment.baseUrl + '/get-pro';
+    const requestUrl = environment.baseUrl + '/item';
 
     let headers = {};
 
@@ -45,7 +45,7 @@ export class ItemRegistrationService {
   editData(id: any, form_details: any) {
     console.log('In the Edit data');
 
-    const requestUrl = environment.baseUrl + '/update-item/' + id.toString();
+    const requestUrl = environment.baseUrl + '/item/' + id.toString();
     let headers = {};
 
     if (this.httpService.getAuthToken() !== null) {
@@ -60,7 +60,7 @@ export class ItemRegistrationService {
   deleteData(id: any) {
     console.log('In the Delete data');
 
-    const requestUrl = environment.baseUrl + '/delete-item/' + id.toString();
+    const requestUrl = environment.baseUrl + '/item/' + id.toString();
     let headers = {};
 
     if (this.httpService.getAuthToken() !== null) {
