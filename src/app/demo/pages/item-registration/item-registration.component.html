@@ -5,66 +5,120 @@
       <!-- Item Name -->
       <mat-form-field class="full-width">
         <mat-label>Item Name</mat-label>
-        <input matInput placeholder="Item Name" formControlName="itemName">
+        <input matInput placeholder="Item Name" formControlName="itemName" required>
+        <mat-error *ngIf="itemRegistrationForm.get('itemName')?.hasError('required')">
+          Item Name is required
+        </mat-error>
+        <mat-error *ngIf="itemRegistrationForm.get('itemName')?.hasError('maxlength')">
+          Item Name cannot exceed 100 characters
+        </mat-error>
       </mat-form-field>
 
       <!-- Generic Name -->
       <mat-form-field class="full-width">
         <mat-label>Generic Name</mat-label>
-        <input matInput placeholder="Generic Name" formControlName="genericName">
+        <input matInput placeholder="Generic Name" formControlName="genericName" required>
+        <mat-error *ngIf="itemRegistrationForm.get('genericName')?.hasError('required')">
+          Generic Name is required
+        </mat-error>
+        <mat-error *ngIf="itemRegistrationForm.get('genericName')?.hasError('maxlength')">
+          Generic Name cannot exceed 100 characters
+        </mat-error>
       </mat-form-field>
 
       <!-- Formulation -->
       <mat-form-field class="full-width">
         <mat-label>Formulation</mat-label>
-        <input matInput placeholder="Formulation (e.g., tablet, gel)" formControlName="formulation">
+        <input matInput placeholder="Formulation (e.g., tablet, gel)" formControlName="formulation" required>
+        <mat-error *ngIf="itemRegistrationForm.get('formulation')?.hasError('required')">
+          Formulation is required
+        </mat-error>
+        <mat-error *ngIf="itemRegistrationForm.get('formulation')?.hasError('maxlength')">
+          Formulation cannot exceed 50 characters
+        </mat-error>
       </mat-form-field>
 
       <!-- Type -->
       <mat-form-field class="full-width">
         <mat-label>Type</mat-label>
-        <input matInput placeholder="Type (e.g., powder, gel)" formControlName="type">
+        <input matInput placeholder="Type (e.g., powder, gel)" formControlName="type" required>
+        <mat-error *ngIf="itemRegistrationForm.get('type')?.hasError('required')">
+          Type is required
+        </mat-error>
+        <mat-error *ngIf="itemRegistrationForm.get('type')?.hasError('maxlength')">
+          Type cannot exceed 50 characters
+        </mat-error>
       </mat-form-field>
 
       <!-- Consume Type -->
       <mat-form-field class="full-width">
         <mat-label>Consume Type</mat-label>
-        <mat-select formControlName="consumeType">
+        <mat-select formControlName="consumeType" required>
           <mat-option value="internal">Internal</mat-option>
           <mat-option value="external">External</mat-option>
         </mat-select>
+        <mat-error *ngIf="itemRegistrationForm.get('consumeType')?.hasError('required')">
+          Consume Type is required
+        </mat-error>
       </mat-form-field>
 
       <!-- Description -->
       <mat-form-field class="full-width">
         <mat-label>Description</mat-label>
         <textarea matInput placeholder="Short description" formControlName="description"></textarea>
+        <mat-error *ngIf="itemRegistrationForm.get('description')?.hasError('maxlength')">
+          Description cannot exceed 500 characters
+        </mat-error>
       </mat-form-field>
 
       <!-- Pack Size -->
       <mat-form-field class="full-width">
         <mat-label>Pack Size</mat-label>
-        <input matInput placeholder="e.g., 10 tabs per pack" formControlName="packSize">
+        <input matInput placeholder="e.g., 10 tabs per pack" formControlName="packSize" required>
+        <mat-error *ngIf="itemRegistrationForm.get('packSize')?.hasError('required')">
+          Pack Size is required
+        </mat-error>
+        <mat-error *ngIf="itemRegistrationForm.get('packSize')?.hasError('maxlength')">
+          Pack Size cannot exceed 50 characters
+        </mat-error>
       </mat-form-field>
 
       <!-- Unit of Measure -->
       <mat-form-field class="full-width">
         <mat-label>Unit of Measure</mat-label>
-        <input matInput placeholder="e.g., tablet, bottle" formControlName="unitOfMeasure">
+        <input matInput placeholder="e.g., tablet, bottle" formControlName="unitOfMeasure" required>
+        <mat-error *ngIf="itemRegistrationForm.get('unitOfMeasure')?.hasError('required')">
+          Unit of Measure is required
+        </mat-error>
+        <mat-error *ngIf="itemRegistrationForm.get('unitOfMeasure')?.hasError('maxlength')">
+          Unit of Measure cannot exceed 50 characters
+        </mat-error>
       </mat-form-field>
 
       <!-- Batch Number -->
       <mat-form-field class="full-width">
         <mat-label>Batch Number</mat-label>
-        <input matInput placeholder="Batch Number" formControlName="batchNumber">
+        <input matInput placeholder="Batch Number" formControlName="batchNumber" required>
+        <mat-error *ngIf="itemRegistrationForm.get('batchNumber')?.hasError('required')">
+          Batch Number is required
+        </mat-error>
+        <mat-error *ngIf="itemRegistrationForm.get('batchNumber')?.hasError('maxlength')">
+          Batch Number cannot exceed 50 characters
+        </mat-error>
       </mat-form-field>
 
       <!-- Expiry Date -->
       <mat-form-field class="full-width">
         <mat-label>Expiry Date</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="expiryDate">
+        <input matInput [matDatepicker]="picker" formControlName="expiryDate" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="itemRegistrationForm.get('expiryDate')?.hasError('required')">
+          Expiry Date is required
+        </mat-error>
+        <mat-error *ngIf="itemRegistrationForm.get('expiryDate')?.hasError('futureDate')">
+          Expiry Date must be in the future
+        </mat-error>
       </mat-form-field>
 
       <!-- Prescription Required -->
@@ -73,7 +127,13 @@
       <!-- Reorder Level -->
       <mat-form-field class="full-width">
         <mat-label>Reorder Level</mat-label>
-        <input matInput type="number" placeholder="Reorder level alert" formControlName="reorderLevel">
+        <input matInput type="number" placeholder="Reorder level alert" formControlName="reorderLevel" required min="0">
+        <mat-error *ngIf="itemRegistrationForm.get('reorderLevel')?.hasError('required')">
+          Reorder Level is required
+        </mat-error>
+        <mat-error *ngIf="itemRegistrationForm.get('reorderLevel')?.hasError('min')">
+          Reorder Level must be 0 or greater
+        </mat-error>
       </mat-form-field>
 
       <!-- Item Image Upload -->

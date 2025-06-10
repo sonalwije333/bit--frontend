@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } f
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { CustomerServiceService } from 'src/app/services/customer/customer-service.service';
+
 import { ItemRegistrationService } from 'src/app/services/item-registration/item-registration.service';
 import { MessageServiceService } from 'src/app/services/message-service/message-service.service';
 
@@ -25,7 +25,7 @@ export interface PeriodicElement {
 export class ItemRegistrationComponent implements OnInit {
 
   itemRegistrationForm: FormGroup;
-  displayedColumns: string[] = ['itemName', 'genericName', 'type', 'consumeType', 'description', 'packSize', 'unitOfMeasure', 'batchNumber', 'expiryDate', 'prescriptionRequired', "reorderLevel"];
+  displayedColumns: string[] = ['itemName', 'genericName', 'type', 'consumeType',  'packSize',  'batchNumber', 'expiryDate', 'prescriptionRequired','actions'];
   dataSource = new MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -45,19 +45,18 @@ export class ItemRegistrationComponent implements OnInit {
 
   ) {
     this.itemRegistrationForm = this.fb.group({
-      itemName: new FormControl(''),
-      genericName: new FormControl(''),
-      formulation: new FormControl(''),
-      type: new FormControl(''),
-      consumeType: new FormControl(''),
-      description: new FormControl(''),
-      packSize: new FormControl(''),
-      unitOfMeasure: new FormControl(''),
-      batchNumber: new FormControl(''),
-      expiryDate: new FormControl(''),
-      prescriptionRequired: new FormControl(''),
-      reorderLevel: new FormControl(''),
-      itemImage: new FormControl(''),
+      itemName: ['', [Validators.required, Validators.maxLength(100)]],
+      genericName: ['', [Validators.required, Validators.maxLength(100)]],
+      formulation: ['', [Validators.required, Validators.maxLength(50)]],
+      type: ['', [Validators.required, Validators.maxLength(50)]],
+      consumeType: ['', Validators.required],
+      description: ['', Validators.required,Validators.maxLength(500)],
+      packSize: ['', [Validators.required, Validators.maxLength(50)]],
+      unitOfMeasure: ['', [Validators.required, Validators.maxLength(50)]],
+      batchNumber: ['', [Validators.required, Validators.maxLength(50)]],
+      expiryDate: ['', [Validators.required]],
+      prescriptionRequired: [false],
+      reorderLevel: ['', [Validators.required, Validators.min(0)]]
     });
   }
 
@@ -185,9 +184,5 @@ export class ItemRegistrationComponent implements OnInit {
   public refreshData(): void {
     this.populateData();
   }
-
-
-
-
   }
 
