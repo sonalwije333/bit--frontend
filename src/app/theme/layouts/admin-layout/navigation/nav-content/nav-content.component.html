@@ -1,6 +1,6 @@
 <!-- Vertical layout -->
 <ng-scrollbar style="height: calc(100vh - 60px)" visibility="hover" id="nav-ps-mantis">
-  <div class="navbar-content">
+  <div class="navbar-content" style="overflow-y: auto; scrollbar-color: red orange; scrollbar-width: thin">
     <ul class="nav coded-inner-navbar" (clickOutside)="fireOutClick()" (mouseleave)="navMob()">
       @for (item of navigations; track item) {
         @if (item.type === 'group' && item.isVisible) {
@@ -30,5 +30,4 @@
         </div>
       </div>
     </div> -->
-  </div>
-</ng-scrollbar>
+
