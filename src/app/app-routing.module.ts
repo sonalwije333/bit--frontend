@@ -55,7 +55,7 @@ const routes: Routes = [
       {
         path: 'pages',
         loadChildren: () => import('./demo/pages/pages.module').then((m) => m.PagesModule)
-      }
+      },
     ]
   }
 ];

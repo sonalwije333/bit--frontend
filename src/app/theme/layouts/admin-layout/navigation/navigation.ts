@@ -175,6 +175,24 @@ export const NavigationItems: NavigationItem[] = [
         breadcrumbs: false
       }
     ]
+  },  {
+    id: 'supplier',  //created supplier
+    title: 'Supplier',
+    type: 'group',
+    icon: 'icon-navigation',
+    auth: authenticationEnum.Home,
+    children: [
+      {
+        id: 'supplierDet',
+        title: 'Supplier',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/pages/supplier',
+        icon: 'dashboard',
+        auth: authenticationEnum.Home,
+        breadcrumbs: false
+      }
+    ]
   },
 
   {

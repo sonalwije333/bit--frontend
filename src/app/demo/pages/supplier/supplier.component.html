@@ -1,0 +1,138 @@
+<div class="container">
+    <div class="form-section">
+        <form class="example-form" [formGroup]="supplierForm" (ngSubmit)="onSubmit()" #formDirective="ngForm">
+            <!-- Supplier Name -->
+            <mat-form-field class="full-width">
+                <mat-label>Supplier Name</mat-label>
+                <input matInput placeholder="Supplier Name" formControlName="supplierName">
+                <span class="text-danger"
+                    *ngIf="(supplierForm.get('supplierName').touched || submitted) && supplierForm.get('supplierName').errors?.['required']">
+                    Supplier name is required*
+                </span>
+            </mat-form-field>
+
+            <!-- NIC -->
+            <mat-form-field class="full-width">
+                <mat-label>NIC</mat-label>
+                <input matInput placeholder="NiC" formControlName="nic">
+                <span class="text-danger"
+                    *ngIf="(supplierForm.get('nic').touched || submitted) && supplierForm.get('nic').errors?.['required']">
+                    NIC is required*
+                </span>
+                <span class="text-danger"
+                    *ngIf="(supplierForm.get('nic').touched || submitted) && supplierForm.get('nic').errors?.['pattern']">
+                    NIC must be a valid format (e.g., 123456789V or 200012345678)*
+                </span>
+            </mat-form-field>
+
+            <!-- Address -->
+            <mat-form-field class="full-width">
+                <mat-label>Address</mat-label>
+                <input matInput placeholder="Address" formControlName="address">
+                <span class="text-danger"
+                    *ngIf="(supplierForm.get('address').touched || submitted) && supplierForm.get('address').errors?.['required']">
+                    Address is required*
+                </span>
+            </mat-form-field>
+
+            <!-- Phone Number -->
+            <mat-form-field class="full-width">
+                <mat-label>Phone Number</mat-label>
+                <input matInput placeholder="Phone Number" formControlName="phoneNumber">
+                <span class="text-danger"
+                    *ngIf="(supplierForm.get('phoneNumber').touched || submitted) && supplierForm.get('phoneNumber').errors?.['required']">
+                    Enter a valid phone number*
+                </span>
+            </mat-form-field>
+
+            <!-- Business Type -->
+            <mat-form-field class="full-width">
+                <mat-label>Business Type</mat-label>
+                <input matInput placeholder="Business Type" formControlName="businessType">
+                <span class="text-danger"
+                    *ngIf="(supplierForm.get('businessType').touched || submitted) && supplierForm.get('businessType').errors?.['required']">
+                    Business type is required*
+                </span>
+            </mat-form-field>
+
+            <!-- Email -->
+            <mat-form-field class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" formControlName="email">
+                <span class="text-danger"
+                    *ngIf="(supplierForm.get('email').touched || submitted) && supplierForm.get('email').errors?.['required']">
+                    Email is required*
+                </span>
+                <span class="text-danger"
+                    *ngIf="(supplierForm.get('email').touched || submitted) && supplierForm.get('email').errors?.['email']">
+                    Please insert a valid email*
+                </span>
+            </mat-form-field>
+
+            <!-- Register Button -->
+            <button type="submit" mat-raised-button color="primary" class="form-button" [disabled]="isButtonDisabled">
+                {{saveButtonLabel}} Register
+            </button>
+            <!-- Reset Button -->
+            <button type="button" mat-raised-button color="secondary" class="form-button"
+                (click)="resetData(formDirective)">
+                Reset
+            </button>
+        </form>
+    </div>
+    <!-- Table section -->
+    <div class="table-section">
+        <div class="refresh-filter-section">
+            <div class="refresh-button">
+                <button mat-icon-button color="primary" (click)="refreshData()">
+                    <mat-icon>refresh</mat-icon>
+                </button>
+            </div>
+            <br>
+            <mat-form-field class="filter">
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input>
+            </mat-form-field>
+        </div>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+            <ng-container matColumnDef="supplierName">
+                <th mat-header-cell *matHeaderCellDef> Supplier Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.supplierName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="nic">
+                <th mat-header-cell *matHeaderCellDef> NIC </th>
+                <td mat-cell *matCellDef="let element"> {{element.nic}} </td>
+            </ng-container>
+            <ng-container matColumnDef="address">
+                <th mat-header-cell *matHeaderCellDef> Address </th>
+                <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+            </ng-container>
+            <ng-container matColumnDef="phoneNumber">
+                <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+                <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+            </ng-container>
+            <ng-container matColumnDef="businessType">
+                <th mat-header-cell *matHeaderCellDef> Business Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.businessType}} </td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="warn" (click)="editData(element)" matTooltip="Edit">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="deleteData(element)" matTooltip="Delete">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of suppliers"></mat-paginator>
+    </div>
+</div>

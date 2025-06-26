@@ -5,6 +5,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { ItemRegistrationComponent } from './item-registration/item-registration.component';
+import { SupplierComponent } from './supplier/supplier.component';
 
 export const PagesRoutes: Routes = [
   {
@@ -36,6 +37,11 @@ export const PagesRoutes: Routes = [
   {
     path: 'item-registration',
     component: ItemRegistrationComponent
+    
+  } ,
+  {
+    path: 'supplier',
+    component: SupplierComponent
     
   }
 ];
