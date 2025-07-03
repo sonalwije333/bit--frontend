@@ -44,4 +44,10 @@ export const PagesRoutes: Routes = [
     component: SupplierComponent
     
   }
+   ,
+  {
+    path: 'customer-login',
+    component: CustomerComponent
+    
+  }
 ];
